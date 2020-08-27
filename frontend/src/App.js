@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import SearchBox from './components/SearchBox';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import RegisterScreen from './screens/RegisterScreen';
 
+import SearchScreen from './screens/SearchScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
@@ -56,6 +58,9 @@ function App() {
               <i className="fa fa-bars" />
             </button>
             <Link to="/">amazona</Link>
+          </div>
+          <div>
+            <Route render={({ history }) => <SearchBox history={history} />} />
           </div>
           <div>
             <Link to="/cart">
@@ -139,7 +144,7 @@ function App() {
                 <li key={x}>
                   <Link
                     onClick={() => setSidebarIsOpen(false)}
-                    to={`/category/${x}`}
+                    to={`/search/category/${x}`}
                   >
                     {x}
                   </Link>
@@ -175,9 +180,22 @@ function App() {
             <Route path="/register" component={RegisterScreen} />
             <Route path="/signin" component={SigninScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/product/:id" component={ProductScreen} exact />
-            <Route path="/category/:id" component={HomeScreen} />
-            <Route path="/search/:search" component={HomeScreen} />
+            <Route path="/product/:id" component={ProductScreen} />
+            <Route
+              path="/search/category/:category/keyword/:keyword/order/:order/min/:min/max/:max/rate/:rate"
+              component={SearchScreen}
+            />
+            <Route
+              path="/search/keyword/:keyword?"
+              component={SearchScreen}
+              exact
+            />
+            <Route
+              path="/search/category/:category"
+              component={SearchScreen}
+              exact
+            />
+            <Route path="/search" component={SearchScreen} exact />
             <Route path="/" exact component={HomeScreen} />
           </div>
         </main>

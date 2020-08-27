@@ -4,7 +4,7 @@ export default function SearchBox(props) {
   const [keyword, setKeyword] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.history.push(`/search/${keyword}`);
+    props.history.push(`/search/keyword/${keyword}`);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -14,7 +14,6 @@ export default function SearchBox(props) {
           name="q"
           id="q"
           onChange={(e) => setKeyword(e.target.value)}
-          placeholder="Search"
         />
         <button className="primary" type="submit">
           Search

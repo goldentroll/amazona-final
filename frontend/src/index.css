@@ -78,11 +78,14 @@ select:hover,
 button:hover {
   border: 0.1rem #404040 solid;
 }
-.primary {
+button.primary {
   background-color: #f0c040;
 }
-.block {
+button.block {
   width: 100%;
+}
+button.small {
+  font-size: 1rem;
 }
 .success {
   color: #20a020;
@@ -152,6 +155,9 @@ img.small {
 }
 .row.top {
   align-items: flex-start;
+}
+.col-3 {
+  flex: 3 1 75rem;
 }
 .col-2 {
   flex: 2 1 50rem;
@@ -278,4 +284,8 @@ aside li {
 /* Carousel */
 .carousel .slide img {
   max-width: 30rem;
+}
+/* Search */
+.active {
+  font-weight: bold;
 }

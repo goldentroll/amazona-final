@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
@@ -9,11 +9,7 @@ import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/LoadingBox';
 import { listTopSellers } from '../actions/userActions';
 
-function HomeScreen(props) {
-  const category = props.match.params.id ? props.match.params.id : '';
-
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
+function HomeScreen() {
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
   const userTopSellers = useSelector((state) => state.userTopSellers);
@@ -24,24 +20,13 @@ function HomeScreen(props) {
   } = userTopSellers;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listProducts({ category, searchKeyword, sortOrder }));
+    dispatch(listProducts({ feaured: true }));
     dispatch(listTopSellers());
 
     return () => {
       //
     };
-  }, [category]);
-  const searchHandler = (e) => {
-    e.preventDefault();
-    dispatch(listProducts({ category, searchKeyword, sortOrder }));
-  };
-
-  const sortHandler = (e) => {
-    setSortOrder(e.target.value);
-    dispatch(
-      listProducts({ category, searchKeyword, sortOrder: e.target.value })
-    );
-  };
+  }, []);
   return (
     <div>
       <h2>Top Sellers</h2>
@@ -63,27 +48,7 @@ function HomeScreen(props) {
       )}
 
       <h2>Featured Products</h2>
-      <div className="row center">
-        <div>
-          <form onSubmit={searchHandler}>
-            <input
-              value={searchKeyword}
-              onChange={(e) => setSearchKeyword(e.target.value)}
-            />
-            <button className="primary" type="submit">
-              Search
-            </button>
-          </form>
-        </div>
-        <div>
-          &nbsp; Sort by{' '}
-          <select value={sortOrder} onChange={sortHandler}>
-            <option value="">Newest</option>
-            <option value="lowest">Lowest</option>
-            <option value="highest">Highest</option>
-          </select>
-        </div>
-      </div>
+
       {loading ? (
         <LoadingBox />
       ) : error ? (

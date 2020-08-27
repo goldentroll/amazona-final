@@ -10,10 +10,10 @@ productRouter.get(
   expressAsyncHandler(async (req, res) => {
     const category = req.query.category ? { category: req.query.category } : {};
     const seller = req.query.seller ? { seller: req.query.seller } : {};
-    const searchKeyword = req.query.searchKeyword
+    const keyword = req.query.keyword
       ? {
           name: {
-            $regex: req.query.searchKeyword,
+            $regex: req.query.keyword,
             $options: 'i',
           },
         }
@@ -26,7 +26,7 @@ productRouter.get(
     const products = await Product.find({
       ...seller,
       ...category,
-      ...searchKeyword,
+      ...keyword,
     })
       .populate('seller', 'seller.name seller.logo')
       .sort(sortOrder);

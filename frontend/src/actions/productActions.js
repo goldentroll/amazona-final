@@ -25,14 +25,14 @@ import {
 
 const listProducts = ({
   category = '',
-  searchKeyword = '',
+  keyword = '',
   sortOrder = '',
   seller = '',
 }) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
     const { data } = await axios.get(
-      `/api/products?category=${category}&seller=${seller}&searchKeyword=${searchKeyword}&sortOrder=${sortOrder}`
+      `/api/products?category=${category}&seller=${seller}&keyword=${keyword}&sortOrder=${sortOrder}`
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
