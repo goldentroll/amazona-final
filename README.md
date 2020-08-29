@@ -1,10 +1,8 @@
-# Amazona Marketplace
+# Amazona ECommerce Website
 
-Hello and Welcome to my coding course to build a ecommerce website like amazon by MERN stack. In this course you will learn the essential tools and skills to design, develop and deploy a fully-function marketplace website using React and Redux in frontend and Node and MongoDB in backend.
+Hello and Welcome to my coding course to build an ecommerce website like amazon by MERN stack. In this course you will learn the essential tools and skills to design, develop and deploy a fully-function marketplace website using React and Redux in frontend and Node and MongoDB in backend.
 
 ## What You Will Learn
-
-This is a practical coding course and we are gonna learn and build lots of stuff in this multi-vendor ecommerce website like:
 
 - create functional component by react
 - use react hooks to handle form inputs
@@ -14,8 +12,7 @@ This is a practical coding course and we are gonna learn and build lots of stuff
 - perform CRUP operations on orders, products and users by mongoose ORM
 - handle authentication and authorization using JsonWebToken
 - create seller and admin roles to manage products, orders and users
-- handle shopping cart for customer to place orders
--
+- handle shopping cart for customer to place orders-
 
 ## Audiences
 
@@ -23,43 +20,43 @@ This course is for non-coders or juniors who want to be a professional web devel
 
 ## What You Will Build
 
-1. What we will build
-   1. HomeScreen
-      1. Create react app
-   2. Product Screen
-      1. Url routing in react
-      2. handle events in react
-   3. Cart Screen
-      1. Save and retrieve data in local storage
-      2. Working javascript array functions
-      3. Update summary based on cart changes
-   4. Sign-in and Register Screen
-      1. Create dynamic form
-      2. Input validation in frontend and backend
-      3. Create web server using node.js
-      4. Connect to Mongodb database
-      5. Add registered user to the database
-      6. Authenticate user based on email and password
-      7. Using Jsonwebtoken to authorize users
-   5. Shipping and Payment Screen
-      1. Create wizard form to get user data in multiple steps
-      2. Save user info in the local storage
-   6. Place Order Screen
-      1. Validate and create order in the database
-   7. Order Screen
-      1. Payment with paypal
-      2. Show order state based on user and admin activities
-   8. Profile Screen
-      1. Create authenticated routes
-      2. enable user to update their informations
-      3. enable user to logout and clear local storage
-      4. show list of orders to user and link it to details
-   9. Seller Menu
-      1. add products, upload files
-      2. manage orders
-   10. Admin Menu
-       1. manage users
-       2. add seller permission
+1.  Home Screen
+    1. Create react app
+    2. List data using JSX and map function
+2.  Product Screen
+    1. Url routing in react
+    2. Handle events in react
+3.  Cart Screen
+    1. Save and retrieve data in local storage
+    2. Working javascript array functions
+    3. Update summary based on cart changes
+4.  Sign-in and Register Screen
+    1. Create dynamic form
+    2. Input validation in frontend and backend
+    3. Create web server using node.js
+    4. Connect to Mongodb database
+    5. Add registered user to the database
+    6. Authenticate user based on email and password
+    7. Using Jsonwebtoken to authorize users
+5.  Shipping and Payment Screen
+    1. Create wizard form to get user data in multiple steps
+    2. Save user info in the local storage
+6.  Place Order Screen
+    1. Validate and create order in the database
+7.  Order Screen
+    1. Payment with Paypal
+    2. Show order state based on user and admin activities
+8.  Profile Screen
+    1. Create authenticated routes
+    2. enable user to update their informations
+    3. enable user to logout and clear local storage
+    4. show list of orders to user and link it to details
+9.  Seller Menu
+    1. add products, upload files
+    2. manage orders
+10. Admin Menu
+    1.  manage users
+    2.  add seller permission
 
 # Lessons
 
@@ -346,23 +343,25 @@ This course is for non-coders or juniors who want to be a professional web devel
 45. Publish heroku
     1. Create git repository
     2. Create heroku account
-    3. install Heroku CLI
-    4. heroku login
-    5. heroku apps:create <yourname>jsamazona
-    6. Edit package.json for heroku-prebuild
-    7. Edit package.json for heroku-postbuild
-    8. Edit package.json for node engines
+    3. Install Heroku CLI
+    4. `heroku login`
+    5. `heroku apps:create <yourname>-amazona`
+    6. Edit package.json
+    7. `"heroku-postbuild": "cd frontend && npm install && npm run build"`
+    8. `"engines": { "node": "12.4.0", "npm": "6.9.0" }`
     9. Create Procfile
-    10. Edit server.js for PORT
-    11. Create mongodb atlas database
-    12. create MongoDB Account
-    13. open cloud.mongodb.com
-    14. add new user and save username and password
-    15. set Network Access to accept all requests
-    16. Create new database
-    17. create connection string based on db name and user and password
-    18. Set Cloud MongoDB connection in heroku env variables
+    10. `web: node --experimental-modules backend/server.js`
+    11. Create MongoDB Atlas Account
+    12. Open cloud.mongodb.com
+    13. Create new database
+    14. Add new user and save username and password
+    15. Set Network Access to accept all requests
+    16. Copy connection string
+    17. Replace db name, username and password with yours.
+    18. `heroku config:set MONGODB_URL=mongodb+srv://<username>:<password>@cluster0.nb7oz.mongodb.net/<dbname>?retryWrites=true&w=majority`
     19. Commit and push
+    20. Open `https://<yourname>-amazona.herokuapp.com/api/users/seed`
+    21. Open `https://<yourname>-amazona.herokuapp.com`
 46. Product Search Bar
     1. create search bar in Header.js
     2. add style
