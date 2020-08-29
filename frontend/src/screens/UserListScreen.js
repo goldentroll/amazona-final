@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Table } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import { listUsers, deleteUser } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { USER_DETAILS_RESET } from '../constants/userConstants';
 
-function UserListScreen() {
+function UserListScreen(props) {
   const userList = useSelector((state) => state.userList);
   const { loading, users, error } = userList;
 
@@ -21,7 +19,7 @@ function UserListScreen() {
     return () => {
       //
     };
-  }, [successDelete]);
+  }, [dispatch, successDelete]);
 
   const deleteHandler = (user) => {
     if (window.confirm('Are you sure to delete this order?')) {
@@ -34,8 +32,8 @@ function UserListScreen() {
       <h1>Users</h1>
 
       {loading && <LoadingBox />}
-      {error && <MessageBox variant="danger">{error}</MessageBox>}
-      <Table striped bordered hover responsive>
+      {error && <MessageBox variant="error">{error}</MessageBox>}
+      <table className="table">
         <thead>
           <tr>
             <th>ID</th>
@@ -55,24 +53,25 @@ function UserListScreen() {
               <td>{user.isSeller ? 'YES' : ' No'}</td>
               <td>{user.isAdmin ? 'YES' : 'No'}</td>
               <td>
-                <LinkContainer to={`/user/${user._id}/edit`}>
-                  <Button variant="light" className="btn-sm">
-                    Edit
-                  </Button>
-                </LinkContainer>
-                <Button
+                <button
                   type="button"
-                  className="btn-sm"
+                  className="small"
+                  onClick={() => props.history.push(`/user/${user._id}/edit`)}
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="small"
                   onClick={() => deleteHandler(user)}
-                  variant="light"
                 >
                   Delete
-                </Button>
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
     </>
   );
 }

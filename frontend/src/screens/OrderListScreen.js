@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Table, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import { listOrders, deleteOrder } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 
@@ -22,7 +20,7 @@ function OrderListScreen(props) {
     return () => {
       //
     };
-  }, [successDelete]);
+  }, [dispatch, successDelete, sellerMode, userInfo]);
 
   const deleteHandler = (order) => {
     if (window.confirm('Are you sure to delete this order?')) {
@@ -34,7 +32,7 @@ function OrderListScreen(props) {
   ) : (
     <>
       <h1>Orders</h1>
-      <Table striped bordered hover responsive>
+      <table className="table">
         <thead>
           <tr>
             <th>ID</th>
@@ -60,24 +58,25 @@ function OrderListScreen(props) {
                 {order.deliveredAt ? order.deliveredAt.substring(0, 10) : 'No'}
               </td>
               <td>
-                <LinkContainer to={`/order/${order._id}`}>
-                  <Button variant="light" className="btn-sm">
-                    Details
-                  </Button>
-                </LinkContainer>
-                <Button
+                <button
                   type="button"
-                  className="btn-sm"
+                  className="small"
+                  onClick={() => props.history.push(`/order/${order._id}`)}
+                >
+                  Details
+                </button>
+                <button
+                  type="button"
+                  className="small"
                   onClick={() => deleteHandler(order)}
-                  variant="light"
                 >
                   Delete
-                </Button>
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
     </>
   );
 }

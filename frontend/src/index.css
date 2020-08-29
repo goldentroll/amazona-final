@@ -3,7 +3,7 @@ html {
   font-size: 62.5%; /* 16px x 62.5% = 10px = 1rem  */
 }
 body {
-  font: 1.6rem Helvetica;
+  font: 1.6rem 'Helvetica Neue', Helvetica, sans-serif;
   height: 100vh;
   margin: 0;
 }
@@ -85,7 +85,7 @@ button.block {
   width: 100%;
 }
 button.small {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 .success {
   color: #20a020;
@@ -115,7 +115,7 @@ header a {
   color: #ffffff;
   padding: 1rem;
 }
-.brand a {
+a.brand {
   color: #ffffff;
   font-size: 3rem;
   font-weight: bold;
@@ -271,12 +271,14 @@ aside li {
   position: absolute;
   display: none;
   right: 0;
+  min-width: 12rem;
   padding: 1rem;
   list-style-type: none;
   z-index: 1;
   background-color: #203040;
   margin: 0;
   margin-top: 0.4rem;
+  border-radius: 0.5rem;
 }
 .dropdown:hover .dropdown-content {
   display: block;
@@ -288,4 +290,22 @@ aside li {
 /* Search */
 .active {
   font-weight: bold;
+}
+/* Table */
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.table tbody tr:nth-of-type(odd) {
+  background-color: #f4f4f4;
+}
+.table td,
+.table th {
+  text-align: left;
+  border: 1px solid #e4e4e4;
+  padding: 0.5rem;
+}
+.table button {
+  margin: 0 0.2rem;
 }

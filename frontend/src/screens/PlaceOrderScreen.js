@@ -41,7 +41,7 @@ function PlaceOrderScreen(props) {
       props.history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
-  }, [success]);
+  }, [success, dispatch, order, props.history]);
 
   return (
     <div>
@@ -133,7 +133,7 @@ function PlaceOrderScreen(props) {
               </li>
               {error && (
                 <li>
-                  <MessageBox variant="danger">{error}</MessageBox>
+                  <MessageBox variant="error">{error}</MessageBox>
                 </li>
               )}
               <li>

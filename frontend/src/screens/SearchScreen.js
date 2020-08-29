@@ -44,7 +44,7 @@ function SearchScreen(props) {
     return () => {
       //
     };
-  }, [category, order, min, max, rate]);
+  }, [category, order, min, max, rate, dispatch, keyword]);
 
   const getFilterUrl = (filter) => {
     const filterCategory = filter.category || category;

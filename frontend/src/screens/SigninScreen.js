@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signin } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import FormContainer from '../components/FormContainer';
 
 function SigninScreen(props) {
   const [email, setEmail] = useState('');
@@ -22,7 +21,7 @@ function SigninScreen(props) {
     return () => {
       //
     };
-  }, [userInfo]);
+  }, [userInfo, props.history, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();

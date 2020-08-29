@@ -26,7 +26,7 @@ function HomeScreen() {
     return () => {
       //
     };
-  }, []);
+  }, [dispatch]);
   return (
     <div>
       <h2>Top Sellers</h2>
@@ -35,7 +35,7 @@ function HomeScreen() {
       ) : errorSellers ? (
         <MessageBox variant="error">{errorSellers}</MessageBox>
       ) : (
-        <Carousel showArrows autoPlay>
+        <Carousel showArrows autoPlay showThumbs={false}>
           {sellers.map((user) => (
             <div key={user._id}>
               <Link to={`/seller/${user._id}`}>

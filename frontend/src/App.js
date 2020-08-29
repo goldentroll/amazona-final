@@ -13,17 +13,18 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
-// import ProfileScreen from './screens/ProfileScreen';
-// import ProductListScreen from './screens/ProductListScreen';
-// import OrderListScreen from './screens/OrderListScreen';
-// import UserListScreen from './screens/UserListScreen';
-// import UserEditScreen from './screens/UserEditScreen';
-// import ProductEditScreen from './screens/ProductEditScreen';
-// import SellerScreen from './screens/SellerScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ProductListScreen from './screens/ProductListScreen';
+import OrderListScreen from './screens/OrderListScreen';
+import UserListScreen from './screens/UserListScreen';
+import UserEditScreen from './screens/UserEditScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
+import SellerScreen from './screens/SellerScreen';
 import { signout } from './actions/userActions';
 import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
+import OrderHistoryScreen from './screens/OrderHistoryScreen';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ function App() {
     return () => {
       //
     };
-  }, []);
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -71,10 +72,19 @@ function App() {
             </Link>
             {userInfo ? (
               <div className="dropdown">
-                <Link to="#admin">{userInfo.name}</Link>
+                <Link to="#admin">
+                  {userInfo.name}{' '}
+                  <i
+                    className="fa fa-caret-down	
+"
+                  />
+                </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/profile"> Profile </Link>
+                    <Link to="/profile">Profile</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderhistory"> Order History </Link>
                   </li>
                   <li>
                     <Link to="#signout" onClick={handleSignout}>
@@ -88,7 +98,13 @@ function App() {
             )}
             {userInfo && userInfo.isSeller && (
               <div className="dropdown">
-                <Link to="#seller">Seller</Link>
+                <Link to="#seller">
+                  Seller{' '}
+                  <i
+                    className="fa fa-caret-down	
+"
+                  />
+                </Link>
                 <ul className="dropdown-content">
                   <li>
                     <Link to="/orderlist/seller"> Orders</Link>
@@ -101,7 +117,13 @@ function App() {
             )}
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
-                <Link to="#seller">Admin</Link>
+                <Link to="#seller">
+                  Admin{' '}
+                  <i
+                    className="fa fa-caret-down	
+"
+                  />
+                </Link>
                 <ul className="dropdown-content">
                   <li>
                     <Link to="/orderlist"> Orders</Link>
@@ -110,7 +132,7 @@ function App() {
                     <Link to="/productlist">Products</Link>
                   </li>
                   <li>
-                    <Link to="/userlist">Products</Link>
+                    <Link to="/userlist">Users</Link>
                   </li>
                 </ul>
               </div>
@@ -159,20 +181,19 @@ function App() {
         </aside>
         <main>
           <div className="container py-3">
-            {/* <Route path="/userlist" component={UserListScreen} />
+            <Route path="/userlist" component={UserListScreen} />
             <Route path="/orderlist/seller" component={OrderListScreen} />
             <Route path="/orderlist" component={OrderListScreen} exact />
             <Route path="/profile" component={ProfileScreen} />
-           
+            <Route path="/orderhistory" component={OrderHistoryScreen} />
+
             <Route path="/productlist/seller" component={ProductListScreen} />
             <Route path="/productlist" component={ProductListScreen} exact />
-            
-            
+
             <Route path="/product/:id/edit" component={ProductEditScreen} />
             <Route path="/seller/:id" component={SellerScreen} />
             <Route path="/user/:id/edit" component={UserEditScreen} />
-            
-             */}{' '}
+
             <Route path="/order/:id" component={OrderScreen} />
             <Route path="/placeorder" component={PlaceOrderScreen} />
             <Route path="/payment" component={PaymentMethodScreen} />
@@ -180,7 +201,7 @@ function App() {
             <Route path="/register" component={RegisterScreen} />
             <Route path="/signin" component={SigninScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/product/:id" component={ProductScreen} />
+            <Route path="/product/:id" component={ProductScreen} exact />
             <Route
               path="/search/category/:category/keyword/:keyword/order/:order/min/:min/max/:max/rate/:rate"
               component={SearchScreen}

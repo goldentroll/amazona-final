@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row, Button, Form, Table } from 'react-bootstrap';
 import axios from 'axios';
-import { LinkContainer } from 'react-router-bootstrap';
 import { updateUserProfile, detailsUser } from '../actions/userActions';
-import { listOrderMine } from '../actions/orderActions';
 import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/LoadingBox';
 
@@ -52,9 +49,6 @@ function ProfileScreen(props) {
   };
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
-
-  const orderMineList = useSelector((state) => state.orderMineList);
-  const { loading: loadingOrders, orders, error: errorOrders } = orderMineList;
   useEffect(() => {
     if (success) {
       return () => {};
@@ -68,9 +62,8 @@ function ProfileScreen(props) {
       setSellerLogo(user.seller ? user.seller.logo : '');
       setSellerDescription(user.seller ? user.seller.description : '');
     }
-    dispatch(listOrderMine());
     return () => {};
-  }, [user, success]);
+  }, [user, success, dispatch, userSignin.userInfo._id]);
   const uploadFileHandler = (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -92,131 +85,109 @@ function ProfileScreen(props) {
       });
   };
   return (
-    <Row>
-      <Col md={4}>
-        <h2> Profile</h2>
+    <div>
+      <form className="form" onSubmit={submitHandler}>
+        <div>
+          <h1>User Profile</h1>
+        </div>
         {loading && <LoadingBox />}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        {error && <MessageBox variant="error">{error}</MessageBox>}
         {success && (
           <MessageBox variant="success">Profile Saved Successfully.</MessageBox>
         )}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="email">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
+        <div>
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            placeholder="Enter name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-          <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="confirm-password">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="confirm password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </Form.Group>
-          {user.isSeller && (
-            <>
-              <h2>Seller</h2>
-              <Form.Group controlId="sellerName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Seller Name"
-                  value={sellerName}
-                  onChange={(e) => setSellerName(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="image">
-                <Form.Label>Logo</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter image url"
-                  value={sellerLogo}
-                  onChange={(e) => setSellerLogo(e.target.value)}
-                />
-                <Form.File
-                  id="image-file"
-                  label="Choose Logo"
-                  custom
-                  onChange={uploadFileHandler}
-                />
-                {uploading && <LoadingBox />}
-              </Form.Group>
-              <Form.Group controlId="sellerDescription">
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows="3"
-                  placeholder="Enter Description"
-                  value={sellerDescription}
-                  onChange={(e) => setSellerDescription(e.target.value)}
-                />
-              </Form.Group>
-            </>
-          )}
-          <Button variant="primary" type="submit">
-            Update
-          </Button>
-        </Form>
-      </Col>
-      <Col md={8}>
-        <h2>Order History</h2>
-        {loadingOrders ? (
-          <LoadingBox />
-        ) : errorOrders ? (
-          <MessageBox variant="danger">{errorOrders} </MessageBox>
-        ) : (
-          <Table striped bordered hover responsive>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>DATE</th>
-                <th>TOTAL</th>
-                <th>PAID</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice}</td>
-                  <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
-                  <td>
-                    <LinkContainer to={`/order/${order._id}`}>
-                      <Button variant="light">Details</Button>
-                    </LinkContainer>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            placeholder="confirm password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
+        {user.isSeller && (
+          <>
+            <h2>Seller</h2>
+            <div>
+              <label htmlFor="sellerName">Seller NAme</label>
+              <input
+                id="sellerName"
+                type="text"
+                placeholder="Enter Seller Name"
+                value={sellerName}
+                onChange={(e) => setSellerName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="image">Image Url</label>
+              <input
+                id="image"
+                type="text"
+                placeholder="Enter logo url"
+                value={sellerLogo}
+                onChange={(e) => setSellerLogo(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="image-file">Image File</label>
+
+              <input
+                type="file"
+                id="image-file"
+                label="Choose Logo"
+                onChange={uploadFileHandler}
+              />
+              {uploading && <LoadingBox />}
+            </div>
+            <div>
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                rows="3"
+                placeholder="Enter Description"
+                value={sellerDescription}
+                onChange={(e) => setSellerDescription(e.target.value)}
+              />
+            </div>
+          </>
         )}
-      </Col>
-    </Row>
+        <div>
+          <div />
+          <button className="primary" type="submit">
+            Update
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 

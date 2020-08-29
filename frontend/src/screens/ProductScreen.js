@@ -8,6 +8,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 function ProductScreen(props) {
+  const productId = props.match.params.id;
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -26,16 +27,16 @@ function ProductScreen(props) {
       setComment('');
       dispatch({ type: PRODUCT_REVIEW_SAVE_RESET });
     }
-    dispatch(detailsProduct(props.match.params.id));
+    dispatch(detailsProduct(productId));
     return () => {
       //
     };
-  }, [productUpdateSuccess]);
+  }, [productUpdateSuccess, dispatch, productId]);
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch actions
     dispatch(
-      updateProductReview(props.match.params.id, {
+      updateProductReview(productId, {
         name: userInfo.name,
         rating,
         comment,
@@ -53,7 +54,7 @@ function ProductScreen(props) {
       {loading ? (
         <LoadingBox />
       ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
+        <MessageBox variant="error">{error}</MessageBox>
       ) : (
         <>
           <div className="row top">

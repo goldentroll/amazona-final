@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form } from 'react-bootstrap';
 import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/LoadingBox';
 import { updateUser, detailsUser } from '../actions/userActions';
-import FormContainer from '../components/FormContainer';
 import { USER_UPDATE_RESET } from '../constants/userConstants';
 
 function UserEditScreen(props) {
+  const userId = props.match.params.id;
   const dispatch = useDispatch();
   const [id, setId] = useState('');
   const [name, setName] = useState('');
@@ -31,7 +30,7 @@ function UserEditScreen(props) {
       props.history.push(`/userlist`);
     }
     if (!user.name) {
-      dispatch(detailsUser(props.match.params.id));
+      dispatch(detailsUser(userId));
     } else {
       setId(user._id);
       setName(user.name);
@@ -43,7 +42,7 @@ function UserEditScreen(props) {
     return () => {
       //
     };
-  }, [user, successUpdate]);
+  }, [user, successUpdate, dispatch, props.history, userId]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -58,55 +57,76 @@ function UserEditScreen(props) {
     );
   };
   return (
-    <FormContainer>
-      <h1>Edit User {name}</h1>
-      {loadingUpdate && <LoadingBox />}
-      {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
-      {loading && <LoadingBox />}
-      {error && <MessageBox variant="danger">{error}</MessageBox>}
-      {user && (
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="email">
-            <Form.Label>Price</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="isSeller">
-            <Form.Check
-              type="checkbox"
-              label="Is Seller"
-              checked={isSeller}
-              onChange={(e) => setIsSeller(e.target.checked)}
-            />
-          </Form.Group>
-          <Form.Group controlId="isAdmin">
-            <Form.Check
-              type="checkbox"
-              label="Is Admin"
-              checked={isAdmin}
-              onChange={(e) => setIsAdmin(e.target.checked)}
-            />
-          </Form.Group>
+    <div>
+      <form className="form" onSubmit={submitHandler}>
+        <div>
+          <h1>Edit User {name}</h1>
+        </div>
 
-          <Button variant="primary" type="submit">
-            Update
-          </Button>
-        </Form>
-      )}
-    </FormContainer>
+        {loadingUpdate && <LoadingBox />}
+        {errorUpdate && <MessageBox variant="error">{errorUpdate}</MessageBox>}
+        {loading && <LoadingBox />}
+        {error && <MessageBox variant="error">{error}</MessageBox>}
+        {user && (
+          <>
+            <div>
+              <label htmlFor="name">Name</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Enter name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="email">Email address</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="isSeller">Is Seller</label>
+              <input
+                id="isSeller"
+                type="checkbox"
+                label="Is Seller"
+                checked={isSeller}
+                onChange={(e) => setIsSeller(e.target.checked)}
+              />
+            </div>
+            <div>
+              <label htmlFor="isAdmin">Is Admin</label>
+              <input
+                id="isAdmin"
+                type="checkbox"
+                label="Is Admin"
+                checked={isAdmin}
+                onChange={(e) => setIsAdmin(e.target.checked)}
+              />
+            </div>
+            <div>
+              <div />
+              <div>
+                <button
+                  onClick={() => props.history.push('/userlist')}
+                  type="button"
+                >
+                  Back
+                </button>{' '}
+                <button className="primary" type="submit">
+                  Update
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+      </form>
+    </div>
   );
 }
 

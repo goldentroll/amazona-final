@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Container, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/LoadingBox';
 import { updateProduct, detailsProduct } from '../actions/productActions';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
-import FormContainer from '../components/FormContainer';
 
 function ProductEditScreen(props) {
+  const productId = props.match.params.id;
   const dispatch = useDispatch();
   const [id, setId] = useState('');
   const [name, setName] = useState('');
@@ -25,7 +24,6 @@ function ProductEditScreen(props) {
     error: errorUpdate,
     loading: loadingUpdate,
     success: successUpdate,
-    product: updatedProduct,
   } = productUpdate;
 
   const productDetails = useSelector((state) => state.productDetails);
@@ -37,7 +35,7 @@ function ProductEditScreen(props) {
       props.history.push(`/productlist`);
     }
     if (!product.name) {
-      dispatch(detailsProduct(props.match.params.id));
+      dispatch(detailsProduct(productId));
     } else {
       setId(product._id);
       setName(product.name);
@@ -52,7 +50,7 @@ function ProductEditScreen(props) {
     return () => {
       //
     };
-  }, [product, successUpdate]);
+  }, [product, successUpdate, dispatch, props.history, productId]);
   const uploadFileHandler = (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -89,94 +87,117 @@ function ProductEditScreen(props) {
     );
   };
   return (
-    <FormContainer>
-      <h2>Edit Product {id}</h2>
-      {loadingUpdate && <LoadingBox />}
-      {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
-      {loading && <LoadingBox />}
-      {error && <MessageBox variant="danger">{error}</MessageBox>}
-      {product && (
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="price">
-            <Form.Label>Price</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="image">
-            <Form.Label>Image</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter image url"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            />
-            <Form.File
-              id="image-file"
-              label="Choose Image"
-              custom
-              onChange={uploadFileHandler}
-            />
+    <div>
+      <form className="form" onSubmit={submitHandler}>
+        <div>
+          <h1>Edit Product {id}</h1>
+        </div>
 
-            {uploading && <LoadingBox />}
-          </Form.Group>
-          <Form.Group controlId="brand">
-            <Form.Label>Brand</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter brand"
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="countInStock">
-            <Form.Label>Count In Stock</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter count in stock"
-              value={countInStock}
-              onChange={(e) => setCountInStock(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="category">
-            <Form.Label>Category</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            />
-          </Form.Group>
+        {loadingUpdate && <LoadingBox />}
+        {errorUpdate && <MessageBox variant="error">{errorUpdate}</MessageBox>}
+        {loading && <LoadingBox />}
+        {error && <MessageBox variant="error">{error}</MessageBox>}
+        {product.name && (
+          <>
+            <div>
+              <label htmlFor="name">Name</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Enter name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="price">Price</label>
+              <input
+                id="price"
+                type="number"
+                placeholder="Enter price"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="image">Image Url</label>
+              <input
+                id="image"
+                type="text"
+                placeholder="Enter image url"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="image-file">Image File</label>
+              <input
+                type="file"
+                id="image-file"
+                label="Choose Image"
+                onChange={uploadFileHandler}
+              />
 
-          <Form.Group controlId="description">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows="3"
-              placeholder="Enter description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </Form.Group>
+              {uploading && <LoadingBox />}
+            </div>
+            <div>
+              <label>Brand</label>
+              <input
+                type="text"
+                placeholder="Enter brand"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="countInStock">Count In Stock</label>
+              <input
+                id="countInStock"
+                type="number"
+                placeholder="Enter count in stock"
+                value={countInStock}
+                onChange={(e) => setCountInStock(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="category">Category</label>
+              <input
+                id="category"
+                type="text"
+                placeholder="Enter category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              />
+            </div>
 
-          <Button variant="primary" type="submit">
-            Update
-          </Button>
-        </Form>
-      )}
-    </FormContainer>
+            <div>
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                rows="3"
+                placeholder="Enter description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+            <div>
+              <div />
+              <div>
+                <button
+                  onClick={() => props.history.push('/productlist')}
+                  type="button"
+                >
+                  Back
+                </button>{' '}
+                <button className="primary" type="submit">
+                  Update
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+      </form>
+    </div>
   );
 }
 

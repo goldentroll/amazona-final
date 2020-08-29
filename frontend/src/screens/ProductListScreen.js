@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Table } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import {
   listProducts,
   deleteProduct,
@@ -43,7 +41,15 @@ function ProductListScreen(props) {
     return () => {
       //
     };
-  }, [successDelete, successCreate]);
+  }, [
+    successDelete,
+    successCreate,
+    dispatch,
+    props.history,
+    createdProduct,
+    userInfo,
+    sellerMode,
+  ]);
 
   const deleteHandler = (product) => {
     if (window.confirm('Are you sure to delete this order?')) {
@@ -56,13 +62,17 @@ function ProductListScreen(props) {
   };
   return (
     <>
-      <h1>Products</h1>
-      <Button onClick={createHandler}>Create Product</Button>
+      <div className="row">
+        <h1>Products</h1>
+        <button type="button" className="primary" onClick={createHandler}>
+          Create Product
+        </button>
+      </div>
 
       {loading && <LoadingBox />}
-      {error && <MessageBox variant="danger">{error}</MessageBox>}
-      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
-      <Table striped bordered hover responsive>
+      {error && <MessageBox variant="error">{error}</MessageBox>}
+      {errorCreate && <MessageBox variant="error">{errorCreate}</MessageBox>}
+      <table className="table">
         <thead>
           <tr>
             <th>ID</th>
@@ -82,24 +92,27 @@ function ProductListScreen(props) {
               <td>{product.category}</td>
               <td>{product.brand}</td>
               <td>
-                <LinkContainer to={`/product/${product._id}/edit`}>
-                  <Button variant="light" className="btn-sm">
-                    Edit
-                  </Button>
-                </LinkContainer>
-                <Button
+                <button
                   type="button"
-                  className="btn-sm"
+                  className="small"
+                  onClick={() =>
+                    props.history.push(`/product/${product._id}/edit`)
+                  }
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="small"
                   onClick={() => deleteHandler(product)}
-                  variant="light"
                 >
                   Delete
-                </Button>
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table>
     </>
   );
 }

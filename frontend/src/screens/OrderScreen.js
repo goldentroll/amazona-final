@@ -12,10 +12,11 @@ import {
 } from '../constants/orderConstants';
 
 function OrderScreen(props) {
+  const orderId = props.match.params.id;
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
   const orderDeliver = useSelector((state) => state.orderDeliver);
-  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+  const { success: successDeliver } = orderDeliver;
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -40,14 +41,11 @@ function OrderScreen(props) {
     };
     if (
       order &&
-      (!order._id ||
-        order._id !== props.match.params.id ||
-        successPay ||
-        successDeliver)
+      (!order._id || order._id !== orderId || successPay || successDeliver)
     ) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
-      dispatch(detailsOrder(props.match.params.id));
+      dispatch(detailsOrder(orderId));
     } else if (order && !order.isPaid) {
       if (!window.paypal) {
         addPaypalScript();
@@ -56,7 +54,7 @@ function OrderScreen(props) {
       }
     }
     return () => {};
-  }, [order, successPay, successDeliver]);
+  }, [order, successPay, successDeliver, dispatch, orderId]);
 
   const handleSuccessPayment = (paymentResult) => {
     dispatch(payOrder(order, paymentResult));
@@ -68,7 +66,7 @@ function OrderScreen(props) {
   return loading ? (
     <LoadingBox />
   ) : error ? (
-    <MessageBox variant="danger">{error}</MessageBox>
+    <MessageBox variant="error">{error}</MessageBox>
   ) : (
     <>
       <h1> Order {order._id}</h1>

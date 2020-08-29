@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import FormContainer from '../components/FormContainer';
 
 function RegisterScreen(props) {
   const [name, setName] = useState('');
@@ -25,7 +24,7 @@ function RegisterScreen(props) {
     return () => {
       //
     };
-  }, [userInfo]);
+  }, [userInfo, props.history, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -38,7 +37,7 @@ function RegisterScreen(props) {
   return (
     <div>
       {loading && <LoadingBox />}
-      {error && <MessageBox variant="danger">{error}</MessageBox>}
+      {error && <MessageBox variant="error">{error}</MessageBox>}
 
       <form className="form" onSubmit={submitHandler}>
         <div>

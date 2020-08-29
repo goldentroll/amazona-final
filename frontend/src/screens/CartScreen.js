@@ -21,7 +21,7 @@ function CartScreen(props) {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
-  }, []);
+  }, [productId, dispatch, qty]);
 
   const checkoutHandler = () => {
     props.history.push('/signin?redirect=shipping');
