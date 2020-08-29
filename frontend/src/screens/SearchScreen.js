@@ -11,7 +11,11 @@ import MessageBox from '../components/MessageBox';
 
 function SearchScreen(props) {
   const productCategoryList = useSelector((state) => state.productCategoryList);
-  const { categories, loading: loadingCategories } = productCategoryList;
+  const {
+    categories,
+    error: errorCategories,
+    loading: loadingCategories,
+  } = productCategoryList;
 
   const productList = useSelector((state) => state.productList);
 
@@ -63,6 +67,8 @@ function SearchScreen(props) {
       <div className="row">
         {loading ? (
           <LoadingBox />
+        ) : error ? (
+          <MessageBox variant="error">{error}</MessageBox>
         ) : (
           <div>
             {products.length} Results
@@ -111,6 +117,8 @@ function SearchScreen(props) {
             <ul>
               {loadingCategories ? (
                 <li>Loading...</li>
+              ) : errorCategories ? (
+                <MessageBox variant="error">{errorCategories}</MessageBox>
               ) : (
                 categories.map((c) => (
                   <li key={c}>
@@ -161,13 +169,15 @@ function SearchScreen(props) {
           </div>
         </div>
         <div className="col-3">
-          <div>{!loading && !products.length && 'There is no product!'}</div>
           {loading ? (
             <LoadingBox />
           ) : error ? (
             <MessageBox variant="error">{error}</MessageBox>
           ) : (
             <div className="row center">
+              {products.length === 0 && (
+                <MessageBox>No Product Found</MessageBox>
+              )}
               {products.map((product) => (
                 <Product key={product._id} product={product} />
               ))}

@@ -35,16 +35,19 @@ function HomeScreen() {
       ) : errorSellers ? (
         <MessageBox variant="error">{errorSellers}</MessageBox>
       ) : (
-        <Carousel showArrows autoPlay showThumbs={false}>
-          {sellers.map((user) => (
-            <div key={user._id}>
-              <Link to={`/seller/${user._id}`}>
-                <img src={user.seller.logo} alt={user.seller.name} />
-                <p className="legend">{user.seller.name}</p>
-              </Link>
-            </div>
-          ))}
-        </Carousel>
+        <>
+          {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
+          <Carousel showArrows autoPlay showThumbs={false}>
+            {sellers.map((user) => (
+              <div key={user._id}>
+                <Link to={`/seller/${user._id}`}>
+                  <img src={user.seller.logo} alt={user.seller.name} />
+                  <p className="legend">{user.seller.name}</p>
+                </Link>
+              </div>
+            ))}
+          </Carousel>
+        </>
       )}
 
       <h2>Featured Products</h2>
@@ -55,7 +58,7 @@ function HomeScreen() {
         <MessageBox variant="error">{error}</MessageBox>
       ) : (
         <>
-          {products.length === 0 && <MessageBox>No Product Found.</MessageBox>}
+          {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
           <div className="row center">
             {products.map((product) => (
               <Product key={product._id} product={product} />

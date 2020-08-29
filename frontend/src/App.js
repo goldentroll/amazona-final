@@ -50,7 +50,7 @@ function App() {
     <BrowserRouter>
       <div className="grid-container">
         <header className="row">
-          <div className="brand">
+          <div>
             <button
               className="open-sidebar"
               type="button"
@@ -58,7 +58,9 @@ function App() {
             >
               <i className="fa fa-bars" />
             </button>
-            <Link to="/">amazona</Link>
+            <Link className="brand" to="/">
+              amazona
+            </Link>
           </div>
           <div>
             <Route render={({ history }) => <SearchBox history={history} />} />

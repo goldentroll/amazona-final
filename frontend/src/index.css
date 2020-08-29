@@ -288,6 +288,14 @@ aside li {
   max-width: 30rem;
 }
 /* Search */
+.search button {
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-left: none;
+}
+.search input {
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-right: none;
+}
 .active {
   font-weight: bold;
 }

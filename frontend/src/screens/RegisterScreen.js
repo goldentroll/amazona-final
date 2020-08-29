@@ -36,9 +36,6 @@ function RegisterScreen(props) {
   };
   return (
     <div>
-      {loading && <LoadingBox />}
-      {error && <MessageBox variant="error">{error}</MessageBox>}
-
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Create Account</h1>

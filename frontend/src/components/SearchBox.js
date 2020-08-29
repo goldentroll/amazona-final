@@ -7,7 +7,7 @@ export default function SearchBox(props) {
     props.history.push(`/search/keyword/${keyword}`);
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="search" onSubmit={handleSubmit}>
       <div className="row">
         <input
           type="text"
@@ -16,7 +16,7 @@ export default function SearchBox(props) {
           onChange={(e) => setKeyword(e.target.value)}
         />
         <button className="primary" type="submit">
-          Search
+          <i className="fa fa-search" />
         </button>
       </div>
     </form>
