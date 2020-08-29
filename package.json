@@ -1,7 +1,7 @@
 {
-  "name": "mern-marketplace",
+  "name": "amazona",
   "version": "1.0.0",
-  "description": "Demo : https://mernmarketplace.herokuapp.com/",
+  "description": "Demo : https://newamazona-final.herokuapp.com/",
   "main": "index.js",
   "type": "module",
   "dependencies": {

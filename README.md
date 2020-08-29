@@ -359,9 +359,11 @@ This course is for non-coders or juniors who want to be a professional web devel
     16. Copy connection string
     17. Replace db name, username and password with yours.
     18. `heroku config:set MONGODB_URL=mongodb+srv://<username>:<password>@cluster0.nb7oz.mongodb.net/<dbname>?retryWrites=true&w=majority`
-    19. Commit and push
-    20. Open `https://<yourname>-amazona.herokuapp.com/api/users/seed`
-    21. Open `https://<yourname>-amazona.herokuapp.com`
+    19. Set SKIP_PREFLIGHT_CHECK=true
+    20. `heroku config:set SKIP_PREFLIGHT_CHECK=true`
+    21. Commit and push
+    22. Open `https://<yourname>-amazona.herokuapp.com/api/users/seed`
+    23. Open `https://<yourname>-amazona.herokuapp.com`
 46. Product Search Bar
     1. create search bar in Header.js
     2. add style
