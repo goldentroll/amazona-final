@@ -37,7 +37,7 @@ const data = {
   ],
   products: [
     {
-      name: 'Nike Slim Shirts',
+      name: 'Nike Slim Shirt',
       category: 'Shirts', // 680 x 830 px
       image: '/images/p1.jpg',
       price: 89,
@@ -48,7 +48,7 @@ const data = {
       description: 'This is a great product.',
     },
     {
-      name: 'Lacoste Slim Shirts',
+      name: 'Lacoste Dress Shirt',
       category: 'Shirts', // 680 x 830 px
       image: '/images/p2.jpg',
       price: 79,
@@ -59,7 +59,7 @@ const data = {
       description: 'This is a great product.',
     },
     {
-      name: 'Adidas Fit Shirts',
+      name: 'Adidas Fit Shirt',
       category: 'Shirts', // 680 x 830 px
       image: '/images/p3.jpg',
       price: 189,
@@ -70,7 +70,7 @@ const data = {
       description: 'This is a great product.',
     },
     {
-      name: 'Nike Slim Pants',
+      name: 'Nike Slim Pant',
       category: 'Pants', // 680 x 830 px
       image: '/images/p4.jpg',
       price: 89,
@@ -81,7 +81,7 @@ const data = {
       description: 'This is a great product.',
     },
     {
-      name: 'D&G Slim Pants',
+      name: 'D&G Slim Pant',
       category: 'Pants', // 680 x 830 px
       image: '/images/p5.jpg',
       price: 70,
@@ -92,7 +92,7 @@ const data = {
       description: 'This is a great product.',
     },
     {
-      name: 'Lacoste Slim Pants',
+      name: 'Lacoste Slim Pant',
       category: 'Pants', // 680 x 830 px
       image: '/images/p6.jpg',
       price: 60,
