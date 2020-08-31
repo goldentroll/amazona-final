@@ -22,7 +22,7 @@ function UserListScreen(props) {
   }, [dispatch, successDelete]);
 
   const deleteHandler = (user) => {
-    if (window.confirm('Are you sure to delete this order?')) {
+    if (window.confirm('Are you sure to delete this user?')) {
       dispatch(deleteUser(user._id));
     }
   };

@@ -44,7 +44,9 @@ function DashboardScreen() {
                   <i className="fa fa-shopping-cart" /> Orders
                 </span>
               </div>
-              <div className="summary-body">{summary.orders[0].numOrders}</div>
+              <div className="summary-body">
+                {summary.orders[0] ? summary.orders[0].numOrders : 0}
+              </div>
             </li>
             <li>
               <div className="summary-title color3">
@@ -53,36 +55,47 @@ function DashboardScreen() {
                 </span>
               </div>
               <div className="summary-body">
-                ${summary.orders[0].totalSales.toFixed(2)}
+                $
+                {summary.orders[0]
+                  ? summary.orders[0].totalSales.toFixed(2)
+                  : 0}
               </div>
             </li>
           </ul>
           <div>
             <div>
               <h2>Sales</h2>
-              <Chart
-                width="100%"
-                height="400px"
-                chartType="AreaChart"
-                loader={<div>Loading Chart</div>}
-                data={[
-                  ['Date', 'Sales'],
-                  ...summary.dailyOrders.map((x) => [x._id, x.sales]),
-                ]}
-              />
+              {summary.dailyOrders.length === 0 ? (
+                <MessageBox>No Sale</MessageBox>
+              ) : (
+                <Chart
+                  width="100%"
+                  height="400px"
+                  chartType="AreaChart"
+                  loader={<div>Loading Chart</div>}
+                  data={[
+                    ['Date', 'Sales'],
+                    ...summary.dailyOrders.map((x) => [x._id, x.sales]),
+                  ]}
+                />
+              )}
             </div>
             <div>
               <h2>Categories</h2>
-              <Chart
-                width="100%"
-                height="400px"
-                chartType="PieChart"
-                loader={<div>Loading Chart</div>}
-                data={[
-                  ['Category', 'Products'],
-                  ...summary.productCategories.map((x) => [x._id, x.count]),
-                ]}
-              />
+              {summary.productCategories.length === 0 ? (
+                <MessageBox>No Category</MessageBox>
+              ) : (
+                <Chart
+                  width="100%"
+                  height="400px"
+                  chartType="PieChart"
+                  loader={<div>Loading Chart</div>}
+                  data={[
+                    ['Category', 'Products'],
+                    ...summary.productCategories.map((x) => [x._id, x.count]),
+                  ]}
+                />
+              )}
             </div>
           </div>
         </>

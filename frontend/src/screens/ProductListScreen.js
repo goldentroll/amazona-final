@@ -52,7 +52,7 @@ function ProductListScreen(props) {
   ]);
 
   const deleteHandler = (product) => {
-    if (window.confirm('Are you sure to delete this order?')) {
+    if (window.confirm('Are you sure to delete this product?')) {
       dispatch(deleteProduct(product._id));
     }
   };
