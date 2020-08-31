@@ -323,6 +323,7 @@ aside li {
 .search input {
   border-radius: 0.5rem 0 0 0.5rem;
   border-right: none;
+  margin-left: 0.5rem;
 }
 .active {
   font-weight: bold;

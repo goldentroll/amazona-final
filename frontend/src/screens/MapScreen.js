@@ -115,7 +115,7 @@ function MapScreen(props) {
       </LoadScript>
     </div>
   ) : (
-    <div>loading...</div>
+    <div>Loading Google Map...</div>
   );
 }
 

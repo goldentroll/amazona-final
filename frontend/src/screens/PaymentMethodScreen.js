@@ -7,7 +7,7 @@ function PaymentMethodScreen(props) {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
   if (!shippingAddress.address) {
-    props.history.push('/shippingAddress');
+    props.history.push('/shipping');
   }
 
   const [paymentMethod, setPaymentMethod] = useState('paypal');

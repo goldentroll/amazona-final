@@ -34,20 +34,21 @@ function ShippingAddressScreen(props) {
       setLng(addressMap.lng);
     }
     if (!newLat || !newLng) {
-      alert('Error. Choose your location on map.');
-    } else {
-      dispatch(
-        saveShippingAddress({
-          address,
-          fullName,
-          city,
-          postalCode,
-          country,
-          lat: newLat,
-          lng: newLng,
-        })
-      );
-      props.history.push('payment');
+      if (window.confirm('You did not set your location on map. Continue?')) {
+        dispatch(
+          saveShippingAddress({
+            address,
+            fullName,
+            city,
+            postalCode,
+            country,
+            lat: newLat,
+            lng: newLng,
+          })
+        );
+
+        props.history.push('payment');
+      }
     }
   };
   const chooseOnMap = () => {
