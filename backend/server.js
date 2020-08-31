@@ -1,3 +1,5 @@
+import http from 'http';
+import socketIO from 'socket.io';
 import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
@@ -40,6 +42,65 @@ app.get('*', (req, res) => {
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
-app.listen(config.PORT, () => {
-  console.log('Server started at http://localhost:5000');
+
+const users = [];
+const httpServer = http.Server(app);
+const io = socketIO(httpServer);
+io.on('connection', (socket) => {
+  socket.on('disconnect', () => {
+    const user = users.find((x) => x.socketId === socket.id);
+    if (user) {
+      user.online = false;
+      console.log('Offline', user.name);
+      console.log(users);
+      const admin = users.find((x) => x.isAdmin && x.online);
+      if (admin) {
+        io.to(admin.socketId).emit('users', user);
+      }
+    }
+    // const index = clients.map((item) => item.socketId).indexOf(socket.id);
+    // clients.splice(index, 1);
+    // console.log('removed', clients);
+  });
+  socket.on('onLogin', (user) => {
+    const updatedUser = { ...user, online: true, socketId: socket.id };
+    const existUser = users.find((x) => x._id === updatedUser._id);
+    if (existUser) {
+      existUser.socketId = socket.id;
+      existUser.online = true;
+    } else {
+      users.push(updatedUser);
+    }
+    console.log('Online', user.name);
+    console.log(users);
+    const admin = users.find((x) => x.isAdmin && x.online);
+    if (admin) {
+      io.to(admin.socketId).emit('users', user);
+    }
+  });
+  socket.on('onMessage', (message) => {
+    console.log(message.name, message.isAdmin, ':', message.body);
+    if (message.isAdmin) {
+      const user = users.find((x) => x._id === message._id && x.online);
+      console.log(user, message._id);
+      if (user) io.to(user.socketId).emit('message', message);
+    } else {
+      const admin = users.find((x) => x.isAdmin && x.online);
+      if (admin) {
+        io.to(admin.socketId).emit('message', message);
+      } else {
+        io.to(socket.id).emit('message', {
+          name: 'Admin',
+          body: 'Sorry. I am not online right now',
+        });
+      }
+    }
+  });
 });
+httpServer.listen(config.PORT, () => {
+  console.log(`Server started at http://localhost:${config.PORT}`);
+});
+
+// app.listen(config.PORT, () => {
+//   console.log('Server started at http://localhost:5000');
+// });

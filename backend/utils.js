@@ -43,7 +43,6 @@ const isAdmin = (req, res, next) => {
 };
 
 const isSeller = (req, res, next) => {
-  console.log(req.user);
   if (req.user && req.user.isSeller) {
     return next();
   }

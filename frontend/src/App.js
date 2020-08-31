@@ -30,6 +30,8 @@ import PrivateRoute from './components/PrivateRoute';
 import SellerRoute from './components/SellerRoute';
 import AdminRoute from './components/AdminRoute';
 import DashboardScreen from './screens/DashboardScreen';
+import ChatBox from './components/ChatBox';
+import SupportScreen from './screens/SupportScreen';
 
 function App() {
   const dispatch = useDispatch();
@@ -143,6 +145,9 @@ function App() {
                   <li>
                     <Link to="/userlist">Users</Link>
                   </li>
+                  <li>
+                    <Link to="/support">Support</Link>
+                  </li>
                 </ul>
               </div>
             )}
@@ -208,6 +213,7 @@ function App() {
           <SellerRoute path="/user/:id/edit" component={UserEditScreen} />
 
           {/* Admin  */}
+          <AdminRoute path="/support" component={SupportScreen} />
           <AdminRoute path="/dashboard" component={DashboardScreen} />
           <AdminRoute path="/userlist" component={UserListScreen} />
           <AdminRoute path="/orderlist" component={OrderListScreen} exact />
@@ -237,6 +243,8 @@ function App() {
           <Route path="/" exact component={HomeScreen} />
         </main>
         <footer className="row center">
+          {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
+
           <div>© 2020 All right reserved.</div>
         </footer>
       </div>
