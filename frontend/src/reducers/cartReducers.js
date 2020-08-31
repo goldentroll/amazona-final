@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
@@ -7,10 +8,10 @@ import {
   CART_ADD_ITEM_FAIL,
 } from '../constants/cartConstants';
 
-function cartReducer(
+export const cartReducer = (
   state = { cartItems: [], shippingAddress: {}, paymentMethod: 'paypal' },
   action
-) {
+) => {
   switch (action.type) {
     case CART_ADD_ITEM_FAIL:
       return { ...state, error: action.payload };
@@ -51,6 +52,4 @@ function cartReducer(
     default:
       return state;
   }
-}
-
-export { cartReducer };
+};

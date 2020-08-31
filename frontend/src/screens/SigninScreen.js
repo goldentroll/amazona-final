@@ -11,9 +11,14 @@ function SigninScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { loading, userInfo, error } = userSignin;
   const dispatch = useDispatch();
-  const redirect = props.location.search
-    ? props.location.search.split('=')[1]
-    : '/';
+  const redirect =
+    props.location.search && props.location.search.indexOf('redirect') >= 0
+      ? props.location.search.split('=')[1]
+      : '/';
+  const message =
+    props.location.search && props.location.search.indexOf('message') >= 0
+      ? props.location.search.split('=')[1]
+      : '';
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
@@ -35,6 +40,11 @@ function SigninScreen(props) {
         </div>
         {loading && <LoadingBox />}
         {error && <MessageBox variant="error">{error}</MessageBox>}
+        {message && (
+          <MessageBox variant="error">
+            {message.replace(/%20/g, ' ')}
+          </MessageBox>
+        )}
 
         <div>
           <label htmlFor="email">Email address</label>
@@ -57,12 +67,13 @@ function SigninScreen(props) {
           />
         </div>
         <div>
-          <div />
+          <label />
           <button className="primary" type="submit">
             Sign In
           </button>
         </div>
         <div>
+          <label />
           <div>
             New customer?{' '}
             <Link

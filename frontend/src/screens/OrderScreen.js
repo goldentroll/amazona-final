@@ -76,7 +76,7 @@ function OrderScreen(props) {
             <li className="card card-body">
               <h2>Shipping</h2>
               <p>
-                <strong>Name:</strong> {order.user.name}{' '}
+                <strong>Full Name:</strong> {order.shippingAddress.fullName}{' '}
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
                 <br />
                 <strong>Address:</strong> {order.shippingAddress.address},{' '}

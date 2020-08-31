@@ -23,9 +23,12 @@ import {
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_FAIL,
   ORDER_DELIVER_RESET,
+  ORDER_SUMMARY_REQUEST,
+  ORDER_SUMMARY_SUCCESS,
+  ORDER_SUMMARY_FAIL,
 } from '../constants/orderConstants';
 
-function orderCreateReducer(state = {}, action) {
+export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case ORDER_CREATE_RESET:
       return {};
@@ -38,9 +41,9 @@ function orderCreateReducer(state = {}, action) {
     default:
       return state;
   }
-}
+};
 
-function orderDetailsReducer(
+export function orderDetailsReducer(
   state = {
     loading: true,
     order: {
@@ -63,12 +66,12 @@ function orderDetailsReducer(
   }
 }
 
-function orderMineListReducer(
+export const orderMineListReducer = (
   state = {
     orders: [],
   },
   action
-) {
+) => {
   switch (action.type) {
     case ORDER_MINE_LIST_REQUEST:
       return { loading: true };
@@ -79,9 +82,28 @@ function orderMineListReducer(
     default:
       return state;
   }
-}
+};
 
-function orderListReducer(state = { loading: true, orders: [] }, action) {
+export const orderSummaryReducer = (
+  state = { loading: true, summary: {} },
+  action
+) => {
+  switch (action.type) {
+    case ORDER_SUMMARY_REQUEST:
+      return { loading: true };
+    case ORDER_SUMMARY_SUCCESS:
+      return { loading: false, summary: action.payload };
+    case ORDER_SUMMARY_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const orderListReducer = (
+  state = { loading: true, orders: [] },
+  action
+) => {
   switch (action.type) {
     case ORDER_LIST_REQUEST:
       return { loading: true };
@@ -92,9 +114,9 @@ function orderListReducer(state = { loading: true, orders: [] }, action) {
     default:
       return state;
   }
-}
+};
 
-function orderPayReducer(
+export const orderPayReducer = (
   state = {
     order: {
       orderItems: [],
@@ -103,7 +125,7 @@ function orderPayReducer(
     },
   },
   action
-) {
+) => {
   switch (action.type) {
     case ORDER_PAY_REQUEST:
       return { loading: true };
@@ -122,9 +144,9 @@ function orderPayReducer(
     default:
       return state;
   }
-}
+};
 
-function orderDeliverReducer(
+export const orderDeliverReducer = (
   state = {
     order: {
       orderItems: [],
@@ -133,7 +155,7 @@ function orderDeliverReducer(
     },
   },
   action
-) {
+) => {
   switch (action.type) {
     case ORDER_DELIVER_REQUEST:
       return { loading: true };
@@ -152,9 +174,9 @@ function orderDeliverReducer(
     default:
       return state;
   }
-}
+};
 
-function orderDeleteReducer(
+export const orderDeleteReducer = (
   state = {
     order: {
       orderItems: [],
@@ -163,7 +185,7 @@ function orderDeleteReducer(
     },
   },
   action
-) {
+) => {
   switch (action.type) {
     case ORDER_DELETE_REQUEST:
       return { loading: true };
@@ -174,13 +196,4 @@ function orderDeleteReducer(
     default:
       return state;
   }
-}
-export {
-  orderCreateReducer,
-  orderDeliverReducer,
-  orderDetailsReducer,
-  orderPayReducer,
-  orderMineListReducer,
-  orderListReducer,
-  orderDeleteReducer,
 };

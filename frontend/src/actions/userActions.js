@@ -27,9 +27,11 @@ import {
   USER_TOPSELLERS_LIST_SUCCESS,
 } from '../constants/userConstants';
 
-const listUsers = (category = '', keyword = '', sortOrder = '') => async (
-  dispatch
-) => {
+export const listUsers = (
+  category = '',
+  keyword = '',
+  sortOrder = ''
+) => async (dispatch) => {
   try {
     dispatch({ type: USER_LIST_REQUEST });
     const { data } = await axios.get(
@@ -39,14 +41,15 @@ const listUsers = (category = '', keyword = '', sortOrder = '') => async (
   } catch (error) {
     dispatch({
       type: USER_LIST_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const updateUser = (user) => async (dispatch, getState) => {
+export const updateUser = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_REQUEST, payload: user });
 
@@ -65,14 +68,15 @@ const updateUser = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const detailsUser = (userId) => async (dispatch) => {
+export const detailsUser = (userId) => async (dispatch) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST, payload: userId });
     const { data } = await axios.get(`/api/users/${userId}`);
@@ -80,14 +84,15 @@ const detailsUser = (userId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const listTopSellers = () => async (dispatch) => {
+export const listTopSellers = () => async (dispatch) => {
   try {
     dispatch({ type: USER_TOPSELLERS_LIST_REQUEST });
     const { data } = await axios.get('/api/users/top-sellers');
@@ -103,7 +108,7 @@ const listTopSellers = () => async (dispatch) => {
   }
 };
 
-const deleteUser = (userId) => async (dispatch, getState) => {
+export const deleteUser = (userId) => async (dispatch, getState) => {
   try {
     const {
       userSignin: {
@@ -120,14 +125,15 @@ const deleteUser = (userId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DELETE_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const updateUserProfile = (user) => async (dispatch, getState) => {
+export const updateUserProfile = (user) => async (dispatch, getState) => {
   const {
     userSignin: { userInfo },
   } = getState();
@@ -150,14 +156,15 @@ const updateUserProfile = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const signin = (email, password) => async (dispatch) => {
+export const signin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
   try {
     const { data } = await axios.post('/api/users/signin', { email, password });
@@ -166,14 +173,15 @@ const signin = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_SIGNIN_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const register = (name, email, password) => async (dispatch) => {
+export const register = (name, email, password) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: { name, email, password } });
   try {
     const { data } = await axios.post('/api/users/register', {
@@ -187,27 +195,17 @@ const register = (name, email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const signout = () => (dispatch) => {
+export const signout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
   localStorage.removeItem('cartItems');
   localStorage.removeItem('shippingAddress');
   dispatch({ type: USER_SIGNOUT });
-};
-export {
-  signin,
-  register,
-  signout,
-  updateUserProfile,
-  listUsers,
-  detailsUser,
-  updateUser,
-  deleteUser,
-  listTopSellers,
 };

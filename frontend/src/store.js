@@ -20,6 +20,7 @@ import {
   userUpdateReducer,
   userDeleteReducer,
   userTopSellersReducer,
+  userAddressMapReducer,
 } from './reducers/userReducers';
 import {
   orderCreateReducer,
@@ -29,6 +30,7 @@ import {
   orderListReducer,
   orderDeleteReducer,
   orderDeliverReducer,
+  orderSummaryReducer,
 } from './reducers/orderReducers';
 
 const shippingAddress = localStorage.getItem('shippingAddress')
@@ -49,6 +51,7 @@ const initialState = {
 };
 const reducer = combineReducers({
   cart: cartReducer,
+  userAddressMap: userAddressMapReducer,
   userList: userListReducer,
   userDetails: userDetailsReducer,
   userUpdate: userUpdateReducer,
@@ -70,6 +73,7 @@ const reducer = combineReducers({
   orderDeliver: orderDeliverReducer,
   orderMineList: orderMineListReducer,
   orderList: orderListReducer,
+  orderSummary: orderSummaryReducer,
   orderDelete: orderDeleteReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

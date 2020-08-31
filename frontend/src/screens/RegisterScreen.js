@@ -84,12 +84,13 @@ function RegisterScreen(props) {
           />
         </div>
         <div>
-          <div />
+          <label />
           <button className="primary" type="submit">
             Register
           </button>
         </div>
         <div>
+          <label />
           <div>
             Already have an account?{' '}
             <Link

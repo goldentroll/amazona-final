@@ -13,6 +13,7 @@ function ProductEditScreen(props) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [images, setImages] = useState([]);
   const [brand, setBrand] = useState('');
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
@@ -41,6 +42,7 @@ function ProductEditScreen(props) {
       setName(product.name);
       setPrice(product.price);
       setImage(product.image);
+      setImages(product.images);
       setCategory(product.category);
       setBrand(product.brand);
       setDescription(product.description);
@@ -51,7 +53,7 @@ function ProductEditScreen(props) {
       //
     };
   }, [product, successUpdate, dispatch, props.history, productId]);
-  const uploadFileHandler = (e) => {
+  const uploadFileHandler = (e, forImages) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
@@ -63,7 +65,11 @@ function ProductEditScreen(props) {
         },
       })
       .then((response) => {
-        setImage(response.data);
+        if (forImages) {
+          setImages([...images, response.data]);
+        } else {
+          setImage(response.data);
+        }
         setUploading(false);
       })
       .catch((err) => {
@@ -79,6 +85,7 @@ function ProductEditScreen(props) {
         name,
         price,
         image,
+        images,
         brand,
         category,
         countInStock,
@@ -138,6 +145,24 @@ function ProductEditScreen(props) {
                 onChange={uploadFileHandler}
               />
 
+              {uploading && <LoadingBox />}
+            </div>
+            <div>
+              <label htmlFor="image-file">Additional Images</label>
+              <div>
+                <ul>
+                  {images.length === 0 && <li>No image</li>}
+                  {images.map((x) => (
+                    <li>{x}</li>
+                  ))}
+                </ul>
+                <input
+                  type="file"
+                  id="additional-image-file"
+                  label="Choose Image"
+                  onChange={(e) => uploadFileHandler(e, true)}
+                />
+              </div>
               {uploading && <LoadingBox />}
             </div>
             <div>

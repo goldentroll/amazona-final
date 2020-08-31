@@ -26,9 +26,10 @@ import {
   USER_TOPSELLERS_LIST_REQUEST,
   USER_TOPSELLERS_LIST_SUCCESS,
   USER_TOPSELLERS_LIST_FAIL,
+  USER_ADDRESS_MAP_CONFIRM,
 } from '../constants/userConstants';
 
-function userSigninReducer(state = {}, action) {
+export function userSigninReducer(state = {}, action) {
   switch (action.type) {
     case USER_SIGNIN_REQUEST:
       return { loading: true };
@@ -37,13 +38,21 @@ function userSigninReducer(state = {}, action) {
     case USER_SIGNIN_FAIL:
       return { loading: false, error: action.payload };
     case USER_SIGNOUT:
-      return {};
+      return { signout: true };
     default:
       return state;
   }
 }
+export const userAddressMapReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_ADDRESS_MAP_CONFIRM:
+      return { address: action.payload };
+    default:
+      return state;
+  }
+};
 
-function userUpdateProfileReducer(state = {}, action) {
+export const userUpdateProfileReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_UPDATE_PROFILE_REQUEST:
       return { loading: true };
@@ -54,9 +63,9 @@ function userUpdateProfileReducer(state = {}, action) {
     default:
       return state;
   }
-}
+};
 
-function userRegisterReducer(state = {}, action) {
+export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_REGISTER_REQUEST:
       return { loading: true };
@@ -67,9 +76,9 @@ function userRegisterReducer(state = {}, action) {
     default:
       return state;
   }
-}
+};
 
-function userListReducer(state = { users: [] }, action) {
+export const userListReducer = (state = { users: [] }, action) => {
   switch (action.type) {
     case USER_LIST_REQUEST:
       return { loading: true, users: [] };
@@ -80,12 +89,12 @@ function userListReducer(state = { users: [] }, action) {
     default:
       return state;
   }
-}
+};
 
-function userDetailsReducer(
+export const userDetailsReducer = (
   state = { user: { reviews: [] }, loading: true },
   action
-) {
+) => {
   switch (action.type) {
     case USER_DETAILS_REQUEST:
       return { ...state, loading: true };
@@ -98,9 +107,12 @@ function userDetailsReducer(
     default:
       return state;
   }
-}
+};
 
-function userTopSellersReducer(state = { sellers: [], loading: true }, action) {
+export const userTopSellersReducer = (
+  state = { sellers: [], loading: true },
+  action
+) => {
   switch (action.type) {
     case USER_TOPSELLERS_LIST_REQUEST:
       return { ...state, loading: true };
@@ -112,9 +124,9 @@ function userTopSellersReducer(state = { sellers: [], loading: true }, action) {
     default:
       return state;
   }
-}
+};
 
-function userDeleteReducer(state = { user: {} }, action) {
+export const userDeleteReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_DELETE_REQUEST:
       return { loading: true };
@@ -125,9 +137,9 @@ function userDeleteReducer(state = { user: {} }, action) {
     default:
       return state;
   }
-}
+};
 
-function userUpdateReducer(state = { user: {} }, action) {
+export const userUpdateReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_UPDATE_REQUEST:
       return { loading: true };
@@ -140,15 +152,4 @@ function userUpdateReducer(state = { user: {} }, action) {
     default:
       return state;
   }
-}
-
-export {
-  userSigninReducer,
-  userRegisterReducer,
-  userUpdateProfileReducer,
-  userListReducer,
-  userUpdateReducer,
-  userDeleteReducer,
-  userDetailsReducer,
-  userTopSellersReducer,
 };

@@ -23,7 +23,7 @@ import {
   PRODUCT_CATEGORY_LIST_FAIL,
 } from '../constants/productConstants';
 
-const listProducts = ({
+export const listProducts = ({
   category = '',
   keyword = '',
   sortOrder = '',
@@ -46,7 +46,7 @@ const listProducts = ({
   }
 };
 
-const updateProduct = (product) => async (dispatch, getState) => {
+export const updateProduct = (product) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_UPDATE_REQUEST, payload: product });
 
@@ -65,14 +65,15 @@ const updateProduct = (product) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_UPDATE_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const detailsProduct = (productId) => async (dispatch) => {
+export const detailsProduct = (productId) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
     const { data } = await axios.get(`/api/products/${productId}`);
@@ -80,14 +81,15 @@ const detailsProduct = (productId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const deleteProduct = (productId) => async (dispatch, getState) => {
+export const deleteProduct = (productId) => async (dispatch, getState) => {
   try {
     const {
       userSignin: {
@@ -104,14 +106,15 @@ const deleteProduct = (productId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DELETE_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const createProduct = () => async (dispatch, getState) => {
+export const createProduct = () => async (dispatch, getState) => {
   try {
     const {
       userSignin: {
@@ -136,9 +139,10 @@ const createProduct = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_CREATE_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
@@ -158,7 +162,7 @@ export const listProductCategories = () => async (dispatch) => {
   }
 };
 
-const updateProductReview = (productId, review) => async (
+export const updateProductReview = (productId, review) => async (
   dispatch,
   getState
 ) => {
@@ -183,18 +187,10 @@ const updateProductReview = (productId, review) => async (
     // report error
     dispatch({
       type: PRODUCT_REVIEW_SAVE_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
-};
-
-export {
-  listProducts,
-  detailsProduct,
-  updateProduct,
-  deleteProduct,
-  updateProductReview,
-  createProduct,
 };

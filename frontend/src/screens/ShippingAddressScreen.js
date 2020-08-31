@@ -11,24 +11,78 @@ function ShippingAddressScreen(props) {
 
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
+  const [fullName, setFullName] = useState(shippingAddress.fullName);
+  const [lat, setLat] = useState(shippingAddress.lat);
+  const [lng, setLng] = useState(shippingAddress.lng);
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
 
+  const userAddressMap = useSelector((state) => state.userAddressMap);
+  const { address: addressMap } = userAddressMap;
+
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({ address, city, postalCode, country }));
-    props.history.push('payment');
+    e.preventDefault();
+    const newLat = addressMap ? addressMap.lat : lat;
+    const newLng = addressMap ? addressMap.lng : lng;
+    if (addressMap) {
+      setLat(addressMap.lat);
+      setLng(addressMap.lng);
+    }
+    if (!newLat || !newLng) {
+      alert('Error. Choose your location on map.');
+    } else {
+      dispatch(
+        saveShippingAddress({
+          address,
+          fullName,
+          city,
+          postalCode,
+          country,
+          lat: newLat,
+          lng: newLng,
+        })
+      );
+      props.history.push('payment');
+    }
   };
+  const chooseOnMap = () => {
+    dispatch(
+      saveShippingAddress({
+        address,
+        fullName,
+        city,
+        postalCode,
+        country,
+        lat,
+        lng,
+      })
+    );
+    props.history.push('/map');
+  };
+
   return (
     <div>
       <CheckoutSteps step1 step2 />
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Shipping Address</h1>
+        </div>
+        <div>
+          <label htmlFor="fullname">Full Name</label>
+          <input
+            type="text"
+            name="fullname"
+            id="fullname"
+            placeholder="Enter full name"
+            value={fullName}
+            required
+            onChange={(e) => setFullName(e.target.value)}
+          />
         </div>
         <div>
           <label htmlFor="address">Address</label>
@@ -75,7 +129,13 @@ function ShippingAddressScreen(props) {
           />
         </div>
         <div>
-          <div />
+          <label htmlFor="chooseOnMap">Location</label>
+          <button type="button" onClick={chooseOnMap}>
+            Choose On Map
+          </button>
+        </div>
+        <div>
+          <label />
           <button className="primary" type="submit">
             Continue
           </button>

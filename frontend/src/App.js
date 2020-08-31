@@ -25,6 +25,11 @@ import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
+import MapScreen from './screens/MapScreen';
+import PrivateRoute from './components/PrivateRoute';
+import SellerRoute from './components/SellerRoute';
+import AdminRoute from './components/AdminRoute';
+import DashboardScreen from './screens/DashboardScreen';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +43,6 @@ function App() {
   const { cartItems } = cart;
   const handleSignout = () => {
     dispatch(signout());
-    document.location.href = '/signin';
   };
   useEffect(() => {
     dispatch(listProductCategories());
@@ -90,7 +94,7 @@ function App() {
                   </li>
                   <li>
                     <Link to="#signout" onClick={handleSignout}>
-                      SignOut
+                      Sign Out
                     </Link>
                   </li>
                 </ul>
@@ -127,6 +131,9 @@ function App() {
                   />
                 </Link>
                 <ul className="dropdown-content">
+                  <li>
+                    <Link to="/dashboard"> Dashboard</Link>
+                  </li>
                   <li>
                     <Link to="/orderlist"> Orders</Link>
                   </li>
@@ -182,45 +189,52 @@ function App() {
           </ul>
         </aside>
         <main>
-          <div className="container py-3">
-            <Route path="/userlist" component={UserListScreen} />
-            <Route path="/orderlist/seller" component={OrderListScreen} />
-            <Route path="/orderlist" component={OrderListScreen} exact />
-            <Route path="/profile" component={ProfileScreen} />
-            <Route path="/orderhistory" component={OrderHistoryScreen} />
+          {/* Customer  */}
+          <PrivateRoute path="/placeorder" component={PlaceOrderScreen} />
+          <PrivateRoute path="/payment" component={PaymentMethodScreen} />
+          <PrivateRoute path="/shipping" component={ShippingAddressScreen} />
+          <PrivateRoute path="/profile" component={ProfileScreen} />
+          <PrivateRoute path="/orderhistory" component={OrderHistoryScreen} />
+          <PrivateRoute path="/order/:id" component={OrderScreen} />
+          <PrivateRoute path="/map" component={MapScreen} exact />
 
-            <Route path="/productlist/seller" component={ProductListScreen} />
-            <Route path="/productlist" component={ProductListScreen} exact />
+          {/* Seller  */}
+          <SellerRoute path="/orderlist/seller" component={OrderListScreen} />
+          <SellerRoute
+            path="/productlist/seller"
+            component={ProductListScreen}
+          />
+          <SellerRoute path="/product/:id/edit" component={ProductEditScreen} />
+          <SellerRoute path="/user/:id/edit" component={UserEditScreen} />
 
-            <Route path="/product/:id/edit" component={ProductEditScreen} />
-            <Route path="/seller/:id" component={SellerScreen} />
-            <Route path="/user/:id/edit" component={UserEditScreen} />
+          {/* Admin  */}
+          <AdminRoute path="/dashboard" component={DashboardScreen} />
+          <AdminRoute path="/userlist" component={UserListScreen} />
+          <AdminRoute path="/orderlist" component={OrderListScreen} exact />
+          <AdminRoute path="/productlist" component={ProductListScreen} exact />
 
-            <Route path="/order/:id" component={OrderScreen} />
-            <Route path="/placeorder" component={PlaceOrderScreen} />
-            <Route path="/payment" component={PaymentMethodScreen} />
-            <Route path="/shipping" component={ShippingAddressScreen} />
-            <Route path="/register" component={RegisterScreen} />
-            <Route path="/signin" component={SigninScreen} />
-            <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/product/:id" component={ProductScreen} exact />
-            <Route
-              path="/search/category/:category/keyword/:keyword/order/:order/min/:min/max/:max/rate/:rate"
-              component={SearchScreen}
-            />
-            <Route
-              path="/search/keyword/:keyword?"
-              component={SearchScreen}
-              exact
-            />
-            <Route
-              path="/search/category/:category"
-              component={SearchScreen}
-              exact
-            />
-            <Route path="/search" component={SearchScreen} exact />
-            <Route path="/" exact component={HomeScreen} />
-          </div>
+          {/* Public  */}
+          <Route
+            path="/search/category/:category/keyword/:keyword/order/:order/min/:min/max/:max/rate/:rate"
+            component={SearchScreen}
+          />
+          <Route
+            path="/search/keyword/:keyword?"
+            component={SearchScreen}
+            exact
+          />
+          <Route
+            path="/search/category/:category?"
+            component={SearchScreen}
+            exact
+          />
+          <Route path="/product/:id" component={ProductScreen} exact />
+          <Route path="/register" component={RegisterScreen} />
+          <Route path="/signin" component={SigninScreen} />
+          <Route path="/cart/:id?" component={CartScreen} />
+          <Route path="/seller/:id" component={SellerScreen} />
+          <Route path="/search" component={SearchScreen} exact />
+          <Route path="/" exact component={HomeScreen} />
         </main>
         <footer className="row center">
           <div>© 2020 All right reserved.</div>

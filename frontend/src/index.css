@@ -21,6 +21,11 @@ body {
   grid-template-rows: 5rem 1fr 5rem;
   height: 100%;
 }
+@media only screen and (max-width: 800px) {
+  .grid-container {
+    grid-template-rows: 11rem 1fr 5rem;
+  }
+}
 header {
   grid-area: header;
   background-color: #203040;
@@ -110,6 +115,10 @@ button.small {
   border-radius: 0.5rem;
   border: 1px solid transparent;
 }
+.full-container {
+  margin: -1rem;
+  height: calc(100% + 2rem);
+}
 /* Header */
 header a {
   color: #ffffff;
@@ -196,6 +205,19 @@ a > .rating > span:last-child {
 .price {
   font-size: 2rem;
 }
+/* Product Details */
+ul.images {
+  display: flex;
+  flex-wrap: wrap;
+}
+ul.images li {
+  margin: 0.5rem;
+}
+ul.images button {
+  background: none;
+  cursor: pointer;
+}
+
 /* Aside */
 .open-sidebar {
   font-size: 3rem;
@@ -240,6 +262,7 @@ aside li {
 }
 .form > div {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: 1rem;
 }
@@ -247,8 +270,10 @@ aside li {
   flex: 1;
 }
 .form input,
+.form button,
 .form select,
-.form textarea {
+.form textarea,
+.form > div > div {
   flex: 2;
 }
 /* Checkout Steps */
@@ -291,6 +316,7 @@ aside li {
 .search button {
   border-radius: 0 0.5rem 0.5rem 0;
   border-left: none;
+  margin-right: 0.5rem;
 }
 .search input {
   border-radius: 0.5rem 0 0 0.5rem;
@@ -316,4 +342,65 @@ aside li {
 }
 .table button {
   margin: 0 0.2rem;
+}
+/* Map */
+
+.map-input-box {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0.5rem auto;
+  width: 25rem;
+  height: 4rem;
+  display: flex;
+}
+.map-input-box input {
+  border-radius: 1rem 0 0 1rem;
+}
+.map-input-box button {
+  border-radius: 0 1rem 1rem 0;
+}
+.map-input-box button {
+  border-left: 0;
+}
+.gmarker {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  left: -10px;
+  top: -10px;
+  border: 1px solid blue;
+  background: red;
+  color: yellow;
+}
+/* Dashboard */
+
+.summary > li {
+  border: 0.1rem #c0c0c0 solid;
+  margin: 2rem;
+  border-radius: 0.5rem;
+  flex: 1 1 20rem;
+}
+.summary-title {
+  font-size: 2rem;
+  padding: 1rem;
+}
+.summary-body {
+  font-size: 4rem;
+  padding: 1rem;
+  text-align: center;
+}
+.summary-title.color1 {
+  background-color: #f0e0e0;
+}
+.summary-title.color2 {
+  background-color: #e0f0e0;
+}
+.summary-title.color3 {
+  background-color: #e0e0f0;
 }

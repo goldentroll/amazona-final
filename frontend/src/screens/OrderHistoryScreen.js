@@ -20,6 +20,8 @@ function OrderHistoryScreen(props) {
         <LoadingBox />
       ) : error ? (
         <MessageBox variant="error">{error}</MessageBox>
+      ) : orders.length === 0 ? (
+        <MessageBox variant="info">No Order Found</MessageBox>
       ) : (
         <table className="table">
           <thead>

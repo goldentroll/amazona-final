@@ -10,6 +10,7 @@ import MessageBox from '../components/MessageBox';
 function ProductScreen(props) {
   const productId = props.match.params.id;
   const [qty, setQty] = useState(1);
+  const [selectedImage, setSelectedImage] = useState('');
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const userSignin = useSelector((state) => state.userSignin);
@@ -46,7 +47,9 @@ function ProductScreen(props) {
   const handleAddToCart = () => {
     props.history.push(`/cart/${props.match.params.id}?qty=${qty}`);
   };
-
+  const changeImage = (image) => {
+    setSelectedImage(image);
+  };
   return (
     <>
       <Link to="/">Back to result</Link>
@@ -59,7 +62,11 @@ function ProductScreen(props) {
         <>
           <div className="row top">
             <div className="col-2">
-              <img className="large" src={product.image} alt={product.name} />
+              <img
+                className="large"
+                src={selectedImage || product.image}
+                alt={product.name}
+              />
             </div>
             <div className="col-1">
               <ul>
@@ -78,6 +85,22 @@ function ProductScreen(props) {
                 <li>
                   Description:
                   <p>{product.description}</p>
+                </li>
+                <li>
+                  Images:
+                  <ul className="images">
+                    {[product.image, ...product.images].map((x) => (
+                      <li key={x}>
+                        <button
+                          type="button"
+                          className="light"
+                          onClick={() => changeImage(x)}
+                        >
+                          <img src={x} alt="product" className="small" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 </li>
               </ul>
             </div>

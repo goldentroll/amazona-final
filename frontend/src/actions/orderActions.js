@@ -21,10 +21,12 @@ import {
   ORDER_DELIVER_FAIL,
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_REQUEST,
+  ORDER_SUMMARY_REQUEST,
+  ORDER_SUMMARY_SUCCESS,
 } from '../constants/orderConstants';
 import { CART_EMPTY } from '../constants/cartConstants';
 
-const createOrder = (order) => async (dispatch, getState) => {
+export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
     const {
@@ -43,14 +45,15 @@ const createOrder = (order) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const listOrderMine = () => async (dispatch, getState) => {
+export const listOrderMine = () => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_MINE_LIST_REQUEST });
     const {
@@ -63,14 +66,36 @@ const listOrderMine = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_MINE_LIST_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const listOrders = ({ seller = '' }) => async (dispatch, getState) => {
+export const summaryOrder = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ORDER_SUMMARY_REQUEST });
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    const { data } = await axios.get('/api/orders/summary', {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    dispatch({ type: ORDER_SUMMARY_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ORDER_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listOrders = ({ seller = '' }) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_LIST_REQUEST });
     const {
@@ -91,7 +116,7 @@ const listOrders = ({ seller = '' }) => async (dispatch, getState) => {
   }
 };
 
-const detailsOrder = (orderId) => async (dispatch, getState) => {
+export const detailsOrder = (orderId) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST, payload: orderId });
     const {
@@ -109,7 +134,10 @@ const detailsOrder = (orderId) => async (dispatch, getState) => {
   }
 };
 
-const payOrder = (order, paymentResult) => async (dispatch, getState) => {
+export const payOrder = (order, paymentResult) => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch({ type: ORDER_PAY_REQUEST, payload: paymentResult });
     const {
@@ -126,14 +154,15 @@ const payOrder = (order, paymentResult) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_PAY_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const deliverOrder = (order) => async (dispatch, getState) => {
+export const deliverOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_DELIVER_REQUEST, payload: {} });
     const {
@@ -150,14 +179,15 @@ const deliverOrder = (order) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_DELIVER_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };
 
-const deleteOrder = (orderId) => async (dispatch, getState) => {
+export const deleteOrder = (orderId) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_DELETE_REQUEST, payload: orderId });
     const {
@@ -170,18 +200,10 @@ const deleteOrder = (orderId) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_DELETE_FAIL,
-      payload: error.response.data.message
-        ? error.response.data.message
-        : error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
-};
-export {
-  createOrder,
-  detailsOrder,
-  payOrder,
-  listOrderMine,
-  listOrders,
-  deleteOrder,
-  deliverOrder,
 };

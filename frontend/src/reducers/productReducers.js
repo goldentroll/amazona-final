@@ -26,7 +26,7 @@ import {
   PRODUCT_CATEGORY_LIST_FAIL,
 } from '../constants/productConstants';
 
-export function productListReducer(state = { products: [] }, action) {
+export const productListReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case PRODUCT_LIST_REQUEST:
       return { loading: true, products: [] };
@@ -37,9 +37,9 @@ export function productListReducer(state = { products: [] }, action) {
     default:
       return state;
   }
-}
+};
 
-export function productCreateReducer(state = {}, action) {
+export const productCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_CREATE_REQUEST:
       return { loading: true };
@@ -52,12 +52,12 @@ export function productCreateReducer(state = {}, action) {
     default:
       return state;
   }
-}
+};
 
-export function productDetailsReducer(
+export const productDetailsReducer = (
   state = { loading: true, product: { reviews: [] } },
   action
-) {
+) => {
   switch (action.type) {
     case PRODUCT_DETAILS_REQUEST:
       return { ...state, loading: true };
@@ -70,9 +70,9 @@ export function productDetailsReducer(
     default:
       return state;
   }
-}
+};
 
-export function productDeleteReducer(state = { product: {} }, action) {
+export const productDeleteReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case PRODUCT_DELETE_REQUEST:
       return { loading: true };
@@ -83,9 +83,9 @@ export function productDeleteReducer(state = { product: {} }, action) {
     default:
       return state;
   }
-}
+};
 
-export function productUpdateReducer(state = { product: {} }, action) {
+export const productUpdateReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case PRODUCT_UPDATE_REQUEST:
       return { loading: true };
@@ -98,9 +98,12 @@ export function productUpdateReducer(state = { product: {} }, action) {
     default:
       return state;
   }
-}
+};
 
-export function productCategoryListReducer(state = { categories: [] }, action) {
+export const productCategoryListReducer = (
+  state = { categories: [] },
+  action
+) => {
   switch (action.type) {
     case PRODUCT_CATEGORY_LIST_REQUEST:
       return { loading: true };
@@ -111,8 +114,8 @@ export function productCategoryListReducer(state = { categories: [] }, action) {
     default:
       return state;
   }
-}
-export function productReviewSaveReducer(state = {}, action) {
+};
+export const productReviewSaveReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_REVIEW_SAVE_REQUEST:
       return { loading: true };
@@ -125,4 +128,4 @@ export function productReviewSaveReducer(state = {}, action) {
     default:
       return state;
   }
-}
+};

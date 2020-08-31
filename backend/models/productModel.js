@@ -17,6 +17,7 @@ const prodctSchema = new mongoose.Schema(
       required: true,
     },
     image: { type: String, required: true },
+    images: [String],
     seller: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

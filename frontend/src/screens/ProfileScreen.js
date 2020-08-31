@@ -181,7 +181,7 @@ function ProfileScreen(props) {
           </>
         )}
         <div>
-          <div />
+          <label />
           <button className="primary" type="submit">
             Update
           </button>

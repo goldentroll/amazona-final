@@ -72,6 +72,8 @@ function ProductListScreen(props) {
         <LoadingBox />
       ) : error ? (
         <MessageBox variant="error">{error}</MessageBox>
+      ) : products.length === 0 ? (
+        <MessageBox variant="info">No Order Found</MessageBox>
       ) : (
         <>
           {errorCreate && (
