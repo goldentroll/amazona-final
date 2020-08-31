@@ -32,15 +32,6 @@ export default function ChatBox(props) {
         setMessages([...messages, { body: data.body, name: data.name }]);
       });
     }
-
-    return () => {
-      // if (socket && !isOpen) {
-      //   console.log('sokect is not null');
-      //   socket.disconnect();
-      // } else {
-      //   console.log('sokect is null');
-      // }
-    };
   }, [messages, isOpen, socket]);
 
   const supportHandler = () => {
@@ -53,7 +44,7 @@ export default function ChatBox(props) {
     if (!messageBody.trim()) {
       alert('Error. Please type message.');
     } else {
-      setMessages([...messages, { body: messageBody, name: 'Me' }]);
+      setMessages([...messages, { body: messageBody, name: userInfo.name }]);
       setMessageBody('');
       setTimeout(() => {
         socket.emit('onMessage', {

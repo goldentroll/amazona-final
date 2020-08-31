@@ -425,6 +425,7 @@ aside li {
 .support-users button {
   background-color: transparent;
   border: none;
+  text-align: left;
 }
 .support-users li {
   margin: 0;
@@ -465,4 +466,7 @@ aside li {
 }
 .support-users .online {
   background-color: #20a020;
+}
+.support-users .unread {
+  background-color: #f02020;
 }

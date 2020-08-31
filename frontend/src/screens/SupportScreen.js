@@ -5,6 +5,7 @@ import MessageBox from '../components/MessageBox';
 
 let allUsers = [];
 let allMessages = [];
+let allSelectedUser = {};
 const ENDPOINT =
   window.location.host.indexOf('localhost') >= 0
     ? 'http://127.0.0.1:5000'
@@ -35,10 +36,20 @@ export default function SupportScreen() {
         isAdmin: userInfo.isAdmin,
       });
       sk.on('message', (data) => {
-        allMessages = [...allMessages, data];
+        if (allSelectedUser._id === data._id) {
+          allMessages = [...allMessages, data];
+        } else {
+          const existUser = allUsers.find((user) => user._id === data._id);
+          if (existUser) {
+            allUsers = allUsers.map((user) =>
+              user._id === existUser._id ? { ...user, unread: true } : user
+            );
+            setUsers(allUsers);
+          }
+        }
         setMessages(allMessages);
       });
-      sk.on('users', (updatedUser) => {
+      sk.on('updateUser', (updatedUser) => {
         const existUser = allUsers.find((user) => user._id === updatedUser._id);
         if (existUser) {
           allUsers = allUsers.map((user) =>
@@ -49,21 +60,42 @@ export default function SupportScreen() {
           allUsers = [...allUsers, updatedUser];
           setUsers(allUsers);
         }
-        console.log(allUsers);
+      });
+      sk.on('listUsers', (updatedUsers) => {
+        allUsers = updatedUsers;
+        setUsers(allUsers);
+      });
+
+      sk.on('selectUser', (user) => {
+        allMessages = user.messages;
+        setMessages(allMessages);
       });
     }
   }, [messages, socket, users]);
   const selectUser = (user) => {
-    setSelectedUser(user);
-    allMessages = [];
-    setMessages(allMessages);
+    allSelectedUser = user;
+    setSelectedUser(allSelectedUser);
+    const existUser = allUsers.find((x) => x._id === user._id);
+    if (existUser) {
+      allUsers = allUsers.map((x) =>
+        x._id === existUser._id ? { ...x, unread: false } : x
+      );
+      setUsers(allUsers);
+    }
+
+    // allMessages = [];
+    // setMessages(allMessages);
+    socket.emit('onUserSelected', user);
   };
   const submitHandler = (e) => {
     e.preventDefault();
     if (!messageBody.trim()) {
       alert('Error. Please type message.');
     } else {
-      allMessages = [...allMessages, { body: messageBody, name: 'Me' }];
+      allMessages = [
+        ...allMessages,
+        { body: messageBody, name: userInfo.name },
+      ];
       setMessages(allMessages);
       setMessageBody('');
       setTimeout(() => {
@@ -98,7 +130,11 @@ export default function SupportScreen() {
                 >
                   {user.name}
                 </button>
-                <span className={user.online ? 'online' : 'offline'} />
+                <span
+                  className={
+                    user.unread ? 'unread' : user.online ? 'online' : 'offline'
+                  }
+                />
               </li>
             ))}
         </ul>
