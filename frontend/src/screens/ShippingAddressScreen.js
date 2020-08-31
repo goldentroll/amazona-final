@@ -33,22 +33,26 @@ function ShippingAddressScreen(props) {
       setLat(addressMap.lat);
       setLng(addressMap.lng);
     }
+    let moveOn = true;
     if (!newLat || !newLng) {
-      if (window.confirm('You did not set your location on map. Continue?')) {
-        dispatch(
-          saveShippingAddress({
-            address,
-            fullName,
-            city,
-            postalCode,
-            country,
-            lat: newLat,
-            lng: newLng,
-          })
-        );
+      moveOn = window.confirm(
+        'You did not set your location on map. Continue?'
+      );
+    }
 
-        props.history.push('payment');
-      }
+    if (moveOn) {
+      dispatch(
+        saveShippingAddress({
+          address,
+          fullName,
+          city,
+          postalCode,
+          country,
+          lat: newLat,
+          lng: newLng,
+        })
+      );
+      props.history.push('payment');
     }
   };
   const chooseOnMap = () => {
