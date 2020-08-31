@@ -49,6 +49,7 @@ export default function SupportScreen() {
           allUsers = [...allUsers, updatedUser];
           setUsers(allUsers);
         }
+        console.log(allUsers);
       });
     }
   }, [messages, socket, users]);
@@ -62,7 +63,8 @@ export default function SupportScreen() {
     if (!messageBody.trim()) {
       alert('Error. Please type message.');
     } else {
-      setMessages([...messages, { body: messageBody, name: 'Me' }]);
+      allMessages = [...allMessages, { body: messageBody, name: 'Me' }];
+      setMessages(allMessages);
       setMessageBody('');
       setTimeout(() => {
         socket.emit('onMessage', {
@@ -86,11 +88,7 @@ export default function SupportScreen() {
             .map((user) => (
               <li
                 key={user._id}
-                className={
-                  user._id === selectedUser._id
-                    ? 'row block selected'
-                    : ' row block'
-                }
+                className={user._id === selectedUser._id ? '  selected' : '  '}
               >
                 <button
                   className="block"
@@ -98,11 +96,9 @@ export default function SupportScreen() {
                   href="#"
                   onClick={() => selectUser(user)}
                 >
-                  <span>{user.name}</span>
-                  <span>
-                    <span className={user.online ? 'online' : 'offline'} />
-                  </span>
+                  {user.name}
                 </button>
+                <span className={user.online ? 'online' : 'offline'} />
               </li>
             ))}
         </ul>

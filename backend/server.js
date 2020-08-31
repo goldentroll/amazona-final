@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
     console.log(users);
     const admin = users.find((x) => x.isAdmin && x.online);
     if (admin) {
-      io.to(admin.socketId).emit('users', user);
+      io.to(admin.socketId).emit('users', updatedUser);
     }
   });
   socket.on('onMessage', (message) => {
