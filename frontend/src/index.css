@@ -92,6 +92,7 @@ button.block {
 button.small {
   font-size: 1.2rem;
 }
+/* Alert */
 .success {
   color: #20a020;
 }
@@ -115,10 +116,7 @@ button.small {
   border-radius: 0.5rem;
   border: 1px solid transparent;
 }
-.full-container {
-  margin: -1rem;
-  height: calc(100% + 2rem);
-}
+
 /* Header */
 header a {
   color: #ffffff;
@@ -137,6 +135,7 @@ a.brand {
   font-size: 1.4rem;
   margin-left: 0.2rem;
 }
+
 /* Image */
 img {
   border-radius: 0.5rem;
@@ -151,6 +150,17 @@ img.medium {
 img.small {
   max-width: 5rem;
   width: 100%;
+}
+ul.images {
+  display: flex;
+  flex-wrap: wrap;
+}
+ul.images li {
+  margin: 0.5rem;
+}
+ul.images button {
+  background: none;
+  cursor: pointer;
 }
 /* Rows and Columns */
 .row {
@@ -190,7 +200,7 @@ a > .rating > span:last-child {
   color: #0000ff;
 }
 
-/* Product Component */
+/* Card */
 .card {
   border: 0.1rem #c0c0c0 solid;
   border-radius: 0.5rem;
@@ -205,20 +215,17 @@ a > .rating > span:last-child {
 .price {
   font-size: 2rem;
 }
-/* Product Details */
-ul.images {
-  display: flex;
-  flex-wrap: wrap;
-}
-ul.images li {
-  margin: 0.5rem;
-}
-ul.images button {
-  background: none;
-  cursor: pointer;
-}
 
 /* Aside */
+aside {
+  position: fixed;
+  width: 30rem;
+  height: 100%;
+  transform: translateX(-30rem);
+  background-color: #efefef;
+  transition: all 0.5s;
+  z-index: 1000;
+}
 .open-sidebar {
   font-size: 3rem;
   padding: 0.2rem 0.5rem;
@@ -233,16 +240,6 @@ ul.images button {
 .close-sidebar {
   padding: 0.3rem 0.8rem;
 }
-
-aside {
-  position: fixed;
-  width: 30rem;
-  height: 100%;
-  transform: translateX(-30rem);
-  background-color: #efefef;
-  transition: all 0.5s;
-  z-index: 1000;
-}
 aside.open {
   transform: translateX(0);
 }
@@ -255,6 +252,7 @@ aside li {
   justify-content: space-between;
   padding: 1rem;
 }
+
 /* Form */
 .form {
   max-width: 60rem;
@@ -276,6 +274,7 @@ aside li {
 .form > div > div {
   flex: 2;
 }
+
 /* Checkout Steps */
 .checkout-steps > div {
   border-top: 0.3rem #c0c0c0 solid;
@@ -287,6 +286,7 @@ aside li {
   border-top: 0.3rem #f08000 solid;
   color: #f08000;
 }
+
 /* Dropdown */
 .dropdown {
   display: inline-block;
@@ -308,10 +308,12 @@ aside li {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 /* Carousel */
 .carousel .slide img {
   max-width: 30rem;
 }
+
 /* Search */
 .search button {
   border-radius: 0 0.5rem 0.5rem 0;
@@ -325,8 +327,8 @@ aside li {
 .active {
   font-weight: bold;
 }
-/* Table */
 
+/* Table */
 .table {
   border-collapse: collapse;
   width: 100%;
@@ -343,8 +345,12 @@ aside li {
 .table button {
   margin: 0 0.2rem;
 }
-/* Map */
 
+/* Map */
+.full-container {
+  margin: -1rem;
+  height: calc(100% + 2rem);
+}
 .map-input-box {
   box-sizing: border-box;
   position: absolute;
@@ -357,29 +363,14 @@ aside li {
 }
 .map-input-box input {
   border-radius: 1rem 0 0 1rem;
+  border-right: 0;
 }
 .map-input-box button {
   border-radius: 0 1rem 1rem 0;
-}
-.map-input-box button {
   border-left: 0;
 }
-.gmarker {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  left: -10px;
-  top: -10px;
-  border: 1px solid blue;
-  background: red;
-  color: yellow;
-}
-/* Dashboard */
 
+/* Dashboard */
 .summary > li {
   border: 0.1rem #c0c0c0 solid;
   margin: 2rem;
