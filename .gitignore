@@ -34,3 +34,9 @@ package-lock.json
 yarn-lock.json
 frontend/package-lock.json
 frontend/yarn-lock.json
+#aws
+.elasticbeanstalk/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

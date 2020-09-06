@@ -380,3 +380,9 @@ This course is for non-coders or juniors who want to be a professional web devel
     7. Update index.js to render aside 9.
     8. call getCategories
     9. create getCategories in api.js
+48. Deploy on AWS
+    1. Install elastic beanstalk
+    2. add .elasticbeanstalk/ to .gitignore
+    3. \$ eb init --platform node.js --region <your region like eu-west-2>
+    4. \$ eb create --sample node-express-env
+    5. \$ eb open
