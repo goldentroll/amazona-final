@@ -33,7 +33,7 @@
     "nodemon": "^2.0.4"
   },
   "scripts": {
-    "serve": "node --experimental-modules backend/server.js",
+    "aws": "cd frontend && npm install && npm run build && cd .. && node --experimental-modules backend/server.js",
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
     "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
