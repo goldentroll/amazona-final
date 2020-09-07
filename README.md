@@ -410,7 +410,7 @@ This course is for non-coders or juniors who want to be a professional web devel
        $ sudo mkdir -p /opt/bitnami/apps/myapp
   $ sudo mkdir /opt/bitnami/apps/myapp/conf
        \$ sudo mkdir /opt/bitnami/apps/myapp/htdocs
-       Create a new Node.js project with Express :
+       Create a new Node.js project with Express vW:
 
 $ cd /opt/bitnami/apps/myapp/htdocs
   $ sudo express --view pug
