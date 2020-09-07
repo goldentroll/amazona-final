@@ -404,7 +404,9 @@ This course is for non-coders or juniors who want to be a professional web devel
     21. open `httpsconsole.aws.amazon.com/cloudwatch`
     22. select Logs > Log groups > Node.js Logs
 49. Deploy on AWS LightSail
-    1. Run the following commands to create the directories:
+    1. chmod ug+x ./post-receive
+    2. ds
+    3. Run the following commands to create the directories:
        $ sudo mkdir -p /opt/bitnami/apps/myapp
   $ sudo mkdir /opt/bitnami/apps/myapp/conf
        \$ sudo mkdir /opt/bitnami/apps/myapp/htdocs
