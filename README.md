@@ -380,7 +380,7 @@ This course is for non-coders or juniors who want to be a professional web devel
     7. Update index.js to render aside 9.
     8. call getCategories
     9. create getCategories in api.js
-48. Deploy on AWS
+48. Deploy on AWS Elastic Beanstalk
     1. Install elastic beanstalk
     2. add .elasticbeanstalk/ to .gitignore
     3. `eb init --platform node.js --region <your region like eu-west-2>`
@@ -394,7 +394,41 @@ This course is for non-coders or juniors who want to be a professional web devel
     11. Set env variables
     12. `eb setenv MONGODB_URL="mongodb+srv://xx"`
     13. `eb setenv SKIP_PREFLIGHT_CHECK=true`
-    14. Commit changes
-    15. `git add . && git commit`
-    16. Deploy on aws
-    17. `eb deploy`
+    14. optional env vars: GOOGLE_API_KEY, PAYPAL_CLIENT_ID and JWT_SECRET
+    15. Commit changes
+    16. `git add . && git commit`
+    17. Deploy on aws
+    18. `eb deploy`
+    19. Watch logs
+    20. `eb logs -cw enable`
+    21. open `httpsconsole.aws.amazon.com/cloudwatch`
+    22. select Logs > Log groups > Node.js Logs
+49. Deploy on AWS LightSail
+    1. Run the following commands to create the directories:
+       $ sudo mkdir -p /opt/bitnami/apps/myapp
+  $ sudo mkdir /opt/bitnami/apps/myapp/conf
+       \$ sudo mkdir /opt/bitnami/apps/myapp/htdocs
+       Create a new Node.js project with Express:
+
+$ cd /opt/bitnami/apps/myapp/htdocs
+  $ sudo express --view pug
+\$ sudo npm install
+Start the Express server:
+
+\$ forever start FILE.js
+
+Create and edit the /opt/bitnami/apps/myapp/conf/httpd-prefix.conf file and add the line below to it:
+
+Include "/opt/bitnami/apps/myapp/conf/httpd-app.conf"
+Create and edit the /opt/bitnami/apps/myapp/conf/httpd-app.conf file and add the content below to it. This is the main configuration file for your application, so modify it further depending on your application's requirements.
+
+ProxyPass / http://127.0.0.1:3000/
+ProxyPassReverse / http://127.0.0.1:3000/
+NOTE: 3000 is the default port for the Express server. If you have customized your application to use a different port, change it here as well.
+
+Once you have created the files and directories above, add the following line to the end of the main Apache configuration file at /opt/bitnami/apache2/conf/bitnami/bitnami-apps-prefix.conf, as shown below:
+
+Include "/opt/bitnami/apps/myapp/conf/httpd-prefix.conf"
+Restart the Apache server:
+
+\$ sudo /opt/bitnami/ctlscript.sh restart apache 2. Config ssl 3. `sudo /opt/bitnami/bncert-tool`
