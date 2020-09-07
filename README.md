@@ -383,6 +383,18 @@ This course is for non-coders or juniors who want to be a professional web devel
 48. Deploy on AWS
     1. Install elastic beanstalk
     2. add .elasticbeanstalk/ to .gitignore
-    3. \$ eb init --platform node.js --region <your region like eu-west-2>
-    4. \$ eb create --sample node-express-env
-    5. \$ eb open
+    3. `eb init --platform node.js --region <your region like eu-west-2>`
+    4. `eb create --sample node-express-env`
+    5. `eb open`
+    6. create file `.ebextensions/nodecommand.config`
+    7. add option_settings `NodeCommand: "npm run serve"`
+    8. add commands `command: "sudo chown -R 496:494 /tmp/.npm"`
+    9. update package.json add `serve` script
+    10. `cd frontend && npm install && npm run build && cd .. && node --experimental-modules backend/server.js`
+    11. Set env variables
+    12. `eb setenv MONGODB_URL="mongodb+srv://xx"`
+    13. `eb setenv SKIP_PREFLIGHT_CHECK=true`
+    14. Commit changes
+    15. `git add . && git commit`
+    16. Deploy on aws
+    17. `eb deploy`

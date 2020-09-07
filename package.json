@@ -33,10 +33,9 @@
     "nodemon": "^2.0.4"
   },
   "scripts": {
-    "start": "node --experimental-modules backend/server.js",
-    "serve": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
-    "prestart": "cd frontend && npm install && npm run build",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
+    "heroku-postbuild": "cd frontend && npm install && npm run build",
+    "serve": "cd frontend && npm install && npm run build && cd .. && node --experimental-modules backend/server.js"
   },
   "repository": {
     "type": "git",
