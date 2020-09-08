@@ -60,63 +60,63 @@ This course is for non-coders or juniors who want to be a professional web devel
 
 # Lessons
 
-1. Introduction to this course
-   1. what you will build
-   2. what you will learn
-   3. who are audiences
-2. Install Tools
-   1. Code Editor
-   2. Web Browser
-   3. VS Code Extension
-3. Website Template
-   1. Create amazona folder
-   2. create template folder
-   3. create index.html
-   4. add default HTML code
-   5. link to style.css
-   6. create header, main and footer
-   7. style elements
-4. Publish Project To Github
-   1. Initialize git repository
-   2. Commit changes
-   3. Create github account
-   4. Create repo on github
-   5. connect local repo to github repo
-   6. push changes to github
-5. Create React App
-   1. npx create-react-app frontend
-   2. npm start
-   3. Remove unused files
-   4. copy index.html content to App.js
-   5. copy style.css content to index.css
-   6. replace class with className
-6. Use React Router Dom
-   1. npm install react-router-dom
-   2. define Route
-   3. Create Home Screen
-   4. Create Product Screen
-7. List Products on Home Screen
-   1. create data.js
-   2. put 6 products there
-   3. copy product images to images folder
-   4. map data.products to JSX in HomeScreen
-   5. create Product.js component
-   6. update style to products
-8. Create Rating Component
-   1. create components/Rating.js
-   2. link to fontawesome.css in index.html
-   3. create div.rating
-   4. define Rating object with render()
-   5. if !props.value return empty div
-   6. else use fa fa-star, fa-star-half-o and fa-star-o
-   7. last span for props.text || ''
-   8. style div.rating, span and last span
-   9. Edit Product component
-   10. Use Rating component
-9. Add Sidebar Menu
-   1. create aside element
-   2. put product categories
-   3. add open and close menu
+1.  Introduction to this course
+    1. what you will build
+    2. what you will learn
+    3. who are audiences
+2.  Install Tools
+    1. Code Editor
+    2. Web Browser
+    3. VS Code Extension
+3.  Website Template
+    1. Create amazona folder
+    2. create template folder
+    3. create index.html
+    4. add default HTML code
+    5. link to style.css
+    6. create header, main and footer
+    7. style elements
+4.  Publish Project To Github
+    1. Initialize git repository
+    2. Commit changes
+    3. Create github account
+    4. Create repo on github
+    5. connect local repo to github repo
+    6. push changes to github
+5.  Create React App
+    1. npx create-react-app frontend
+    2. npm start
+    3. Remove unused files
+    4. copy index.html content to App.js
+    5. copy style.css content to index.css
+    6. replace class with className
+6.  Use React Router Dom
+    1. npm install react-router-dom
+    2. define Route
+    3. Create Home Screen
+    4. Create Product Screen
+7.  List Products on Home Screen
+    1. create data.js
+    2. put 6 products there
+    3. copy product images to images folder
+    4. map data.products to JSX in HomeScreen
+    5. create Product.js component
+    6. update style to products
+8.  Create Rating Component
+    1. create components/Rating.js
+    2. link to fontawesome.css in index.html
+    3. create div.rating
+    4. define Rating object with render()
+    5. if !props.value return empty div
+    6. else use fa fa-star, fa-star-half-o and fa-star-o
+    7. last span for props.text || ''
+    8. style div.rating, span and last span
+    9. Edit Product component
+    10. Use Rating component
+9.  Add Sidebar Menu
+    1. create aside element
+    2. put product categories
+    3. add open and close menu
 10. Create Product Details Screen
     1. Create 3 columns for product
     2. column 1 for image
@@ -404,33 +404,53 @@ This course is for non-coders or juniors who want to be a professional web devel
     21. open `httpsconsole.aws.amazon.com/cloudwatch`
     22. select Logs > Log groups > Node.js Logs
 49. Deploy on AWS LightSail
-    1. chmod ug+x ./post-receive
-    2. ds
-    3. Run the following commands to create the directories:
-       $ sudo mkdir -p /opt/bitnami/apps/myapp
-  $ sudo mkdir /opt/bitnami/apps/myapp/conf
-       \$ sudo mkdir /opt/bitnami/apps/myapp/htdocs
-       Create a new Node.js project swit h Exp ress vW:
 
-$ cd /opt/bitnami/apps/myapp/htdocs
-  $ sudo express --view pug
-\$ sudo npm install
-Start the Express server:
+    1. mkdir -p ~/apps/newamazona-final/repo
+    2. mkdir -p ~/apps/newamazona-final/dest
+    3. cd repo
+    4. git --bare init
+    5. nano hooks/post-receive
+       ```shell
+       #!/bin/bash -l
+       export SKIP_PREFLIGHT_CHECK=true
+       echo 'post-receive: Triggered.'
+       cd ~/apps/newamazona-final/dest/
+       echo 'post-receive: git check out...'
+       git --git-dir=~/apps/newamazona-final/repo/ --work-tree=~/apps/newamazona-final/dest/ checkout master -f
+       echo 'post-receive: npm install...'
+       npm install
+       npm run build
+       forever restart newamazona-final
+       ```
+    6. chmod ug+x hooks/post-receive
+    7. create .env file in dest folder
+    8. add MONGODB_URL, SKIP_PREFLIGHT_CHECK and PORT=4200
+    9. npm install forever -g
+    10. forever start --uid="newamazona-final" --sourceDir="~/apps/newamazona-final/dest/" backend/server.js
+    11. sudo /opt/bitnami/bncert-tool
+    12. nano /opt/bitnami/apache2/conf/bitnami/bitnami-ssl.conf
 
-\$ forever start FILE.js
+    ```shell
+    <VirtualHost _default_:443>
+      ServerName amazona.webacademy.pro
+      # ...
 
-Create and edit the /opt/bitnami/apps/myapp/conf/httpd-prefix.conf file and add the line below to it:
+      ProxyRequests Off
+      <Proxy *>
+            Order deny,allow
+            Allow from all
+      </Proxy>
+      ProxyPass / http://localhost:4200/
+      ProxyPassReverse / http://localhost:4200/
+      # Error Documents
+      ErrorDocument 503 /503.html
+      # ...
+    </VirtualHost>
+    ```
 
-Include "/opt/bitnami/apps/myapp/conf/httpd-app.conf"
-Create and edit the /opt/bitnami/apps/myapp/conf/httpd-app.conf file and add the content below to it. This is the main configuration file for your application, so modify it further depending on your application's requirements.
-
-ProxyPass / http://127.0.0.1:3000/
-ProxyPassReverse / http://127.0.0.1:3000/
-NOTE: 3000 is the default port for the Express server. If you have customized your application to use a different port, change it here as well.
-
-Once you have created the files and directories above, add the following line to the end of the main Apache configuration file at /opt/bitnami/apache2/conf/bitnami/bitnami-apps-prefix.conf, as shown below:
-
-Include "/opt/bitnami/apps/myapp/conf/httpd-prefix.conf"
-Restart the Apache server:
-
-\$ sudo /opt/bitnami/ctlscript.sh restart apache 2. Config ssl 3. `sudo /opt/bitnami/bncert-tool`
+    13. sudo /opt/bitnami/ctlscript.sh restart apache
+    14. In Lightsail UI > Network > DNS > Add A amazona subdomain
+    15. In Local computer
+    16. git remote add academy ssh://bitnami@18.133.37.82/home/bitnami/apps/newamazona-final/repo/
+    17. git add . && git commit -m "m" && git push academy
+    18. open https://amazona.webacademy.pro
