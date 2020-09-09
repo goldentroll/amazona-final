@@ -416,7 +416,7 @@ This course is for non-coders or juniors who want to be a professional web devel
        echo 'post-receive: Triggered.'
        cd ~/apps/newamazona-final/dest/
        echo 'post-receive: git check out...'
-       git --git-dir=~/apps/newamazona-final/repo/ --work-tree=~/apps/newamazona-final/dest/ checkout master -f
+       git --git-dir=/home/bitnami/apps/newamazona-final/repo/ --work-tree=/home/bitnami/apps/newamazona-final/dest/ checkout master -f
        echo 'post-receive: npm install...'
        npm install
        npm run build
@@ -426,7 +426,7 @@ This course is for non-coders or juniors who want to be a professional web devel
     7. create .env file in dest folder
     8. add MONGODB_URL, SKIP_PREFLIGHT_CHECK and PORT=4200
     9. npm install forever -g
-    10. forever start --uid="newamazona-final" --sourceDir="~/apps/newamazona-final/dest/" backend/server.js
+    10. forever start --uid="newamazona-final" --sourceDir="/home/bitnami/apps/newamazona-final/dest/" backend/server.js
     11. sudo /opt/bitnami/bncert-tool
     12. nano /opt/bitnami/apache2/conf/bitnami/bitnami-ssl.conf
 
