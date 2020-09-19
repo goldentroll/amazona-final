@@ -405,8 +405,8 @@ This course is for non-coders or juniors who want to be a professional web devel
     22. select Logs > Log groups > Node.js Logs
 49. Deploy on AWS LightSail
 
-    1. mkdir -p ~/apps/newamazona-final/repo
-    2. mkdir -p ~/apps/newamazona-final/dest
+    1. mkdir -p ~/apps/amazona/repo
+    2. mkdir -p ~/apps/amazona/dest
     3. cd repo
     4. git --bare init
     5. nano hooks/post-receive
@@ -414,19 +414,19 @@ This course is for non-coders or juniors who want to be a professional web devel
        #!/bin/bash -l
        export SKIP_PREFLIGHT_CHECK=true
        echo 'post-receive: Triggered.'
-       cd ~/apps/newamazona-final/dest/
+       cd ~/apps/amazona/dest/
        echo 'post-receive: git check out...'
-       git --git-dir=/home/bitnami/apps/newamazona-final/repo/ --work-tree=/home/bitnami/apps/newamazona-final/dest/ checkout master -f
+       git --git-dir=/home/bitnami/apps/amazona/repo/ --work-tree=/home/bitnami/apps/amazona/dest/ checkout master -f
        echo 'post-receive: npm install...'
        npm install
        npm run build
-       forever restart newamazona-final
+       forever restart amazona
        ```
     6. chmod ug+x hooks/post-receive
     7. create .env file in dest folder
     8. add MONGODB_URL, SKIP_PREFLIGHT_CHECK and PORT=4200
     9. npm install forever -g
-    10. forever start --uid="newamazona-final" --sourceDir="/home/bitnami/apps/newamazona-final/dest/" backend/server.js
+    10. forever start --uid="amazona" --sourceDir="/home/bitnami/apps/amazona/dest/" backend/server.js
     11. sudo /opt/bitnami/bncert-tool
     12. nano /opt/bitnami/apache2/conf/bitnami/bitnami-ssl.conf
 
@@ -451,6 +451,6 @@ This course is for non-coders or juniors who want to be a professional web devel
     13. sudo /opt/bitnami/ctlscript.sh restart apache
     14. In Lightsail UI > Network > DNS > Add A amazona subdomain
     15. In Local computer
-    16. git remote add academy ssh://bitnami@18.133.37.82/home/bitnami/apps/newamazona-final/repo/
+    16. git remote add academy ssh://bitnami@18.133.37.82/home/bitnami/apps/amazona/repo/
     17. git add . && git commit -m "m" && git push academy
     18. open https://amazona.webacademy.pro
