@@ -138,7 +138,7 @@ function ProfileScreen(props) {
           <>
             <h2>Seller</h2>
             <div>
-              <label htmlFor="sellerName">Seller NAme</label>
+              <label htmlFor="sellerName">Seller Name</label>
               <input
                 id="sellerName"
                 type="text"
