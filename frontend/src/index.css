@@ -3,9 +3,12 @@ html {
   font-size: 62.5%; /* 16px x 62.5% = 10px = 1rem  */
 }
 body {
-  font: 1.6rem 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 1.6rem;
+  font-family: Helvetica, Arial, sans-serif;
   height: 100vh;
   margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 /* Layout */
 #root {
@@ -70,8 +73,11 @@ select,
 button {
   padding: 1rem;
   border-radius: 0.5rem;
+  border: 0.1rem #a4a4a4 solid;
   font-size: 1.6rem;
-  border: 0.1rem #808080 solid;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 button {
   background-color: #f8f8f8;
