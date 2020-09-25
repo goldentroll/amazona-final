@@ -91,7 +91,7 @@ function ProfileScreen(props) {
           <h1>User Profile</h1>
         </div>
         {loading && <LoadingBox />}
-        {error && <MessageBox variant="error">{error}</MessageBox>}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
         {success && (
           <MessageBox variant="success">Profile Saved Successfully.</MessageBox>
         )}

@@ -3,9 +3,11 @@
     2. what you will learn
     3. who are audiences
 2.  Install Tools
-    1. Code Editor
-    2. Web Browser
-    3. VS Code Extension
+    1. VS Code
+    2. Google chrome
+    3. Git
+    4. Node.JS
+    5. MongoDB
 3.  Design Website Template
     1. Create amazona folder
     2. create template folder
@@ -68,22 +70,21 @@
     5.  install axios
     6.  get data from /api/products
     7.  show them in the list
-11. Create Loading and MessageBox Component
-    1. Create Loading Component
-    2. Create Message Box Component
-    3. Use them in HomeScreen
-12. Add Sidebar Menu
+    8.  create Loading Component
+    9.  create Message Box Component
+    10. use them in HomeScreen
+11. Add Sidebar Menu
     1. create aside element
     2. put product categories
     3. add open and close menu
-13. Install ESlint For Code Linting
+12. Install ESlint For Code Linting
     1.  npm install -D eslint
     2.  install VSCode eslint extension
     3.  Set VSCode setting for eslint
     4.  Install prettier extension
     5.  npm install -D eslint-config-prettier
     6.  Add extends: "prettier"
-14. Add Redux to Home Screen
+13. Add Redux to Home Screen
     1.  npm install redux react-redux
     2.  Create store.js
     3.  initState= {products:[]}
@@ -94,29 +95,29 @@
     8.  const dispatch = useDispatch()
     9.  useEffect(()=>dispatch({type: LOAD_PRODUCTS, payload: data})
     10. Add store to index.js
-15. Add Redux to Product Screen
+14. Add Redux to Product Screen
     1. create product details constants, actions and reducers
     2. add reducer to store.js
     3. use action in ProductScreen.js
     4. add /api/product/:id to backend api
-16. Handle Add To Cart Button
+15. Handle Add To Cart Button
     1. Handle Add To Cart in ProductScreen.js
     2. create CartScreen.js
-17. Implement Add to Cart Action
+16. Implement Add to Cart Action
     1. create addToCart constants, actions and reducers
     2. add reducer to store.js
     3. use action in CartScreen.js
     4. render cartItems.length
-18. Design Cart Screen
+17. Design Cart Screen
     1. create 2 columns for cart items and cart action
     2. cartItems.length === 0 ? cart is empty
     3. show item image, name, qty and price
     4. Proceed to Checkout button
-19. Implement Remove From Cart Action
+18. Implement Remove From Cart Action
     1. create removeFromCart constants, actions and reducers
     2. add reducer to store.js
     3. use action in CartScreen.js
-20. Insert Sample Data in MongoDB
+19. Insert Sample Data in MongoDB
     1. npm install mongoose
     2. connect to mongodb
     3. create config.js
@@ -128,19 +129,19 @@
     9. create productSchema and productModel
     10. create userRoute
     11. Seed sample data
-21. Create Sign-in Backend
+20. Create Sign-in Backend
     1. create API for /api/users/signin
     2. create isAuth middleware
-22. Design SignIn Screen
+21. Design SignIn Screen
     1. create SigninScreen
     2. render email and password fields
     3. create signin constants, actions and reducers
     4. Update Header based on user login
-23. Implement SignIn Action
+22. Implement SignIn Action
     1. create signin constants, actions and reducers
     2. add reducer to store.js
     3. use action in SigninScreen.js
-24. Create Register Backend and Screen
+23. Create Register Backend and Screen
     1. create API for /api/users/register
     2. insert new user to database
     3. return user info and token
@@ -148,107 +149,107 @@
     5. Add fields
     6. Style fields
     7. Add screen to App.js
-25. Implement Register Action
+24. Implement Register Action
     1. create register constants, actions and reducers
     2. add reducer to store.js
     3. use action in RegisterScreen.js
-26. Create Profile Backend and Screen
+25. Create Profile Backend and Screen
     1. create profile update api in backend
     2. create isAuth in utils.js and use in update profile
     3. create ProfileScreen.js
     4. add form elements
-27. Implement Profile Action
+26. Implement Profile Action
     1. create user details constants, actions and reducers
     2. add reducer to store.js
     3. use action in ProfileScreen.js
     4. create update profile constants, actions and reducers
     5. add reducer to store.js
     6. use action in ProfileScreen.js
-28. Design Checkout Wizard Screen
+27. Design Checkout Wizard Screen
     1. create CheckoutSteps.js
     2. create div elements for step 1 to 4
     3. handle redirect in signin and register
     4. create shipping screen
-29. Implement Checkout Wizard Action
+28. Implement Checkout Wizard Action
     1. saveShippingAddress constant, reducer and actions
     2. copy shipping screen and as payment screen
     3. define getPayment and setPayment
     4. redirect user to PlaceOrder.js
-30. Create Place Order API
+29. Create Place Order API
     1. createOrder api
     2. create orderModel
     3. create orderRouter
     4. create post order route
-31. Design PlaceOrder Screen
+30. Design PlaceOrder Screen
     1. create CartScreen.js
     2. Add checkout wizard
     3. Add shipping, payment and items preview
     4. Add Place Order button
-32. Implement PlaceOrder Action
+31. Implement PlaceOrder Action
     1. handle place order button click
     2. create place order constants, action and reducer
-33. Create Order Screen
+32. Create Order Screen
     1. build order api for /api/orders/:id
     2. create OrderScreen.js
     3. dispatch order details action in useEffect
     4. load data with useSelector
     5. show data like place order screen
     6. create order details constant, action and reducer
-34. Add PayPal Button
+33. Add PayPal Button
     1. get client id from paypal
     2. set it in .env file
     3. create route form /api/paypal/clientId
     4. create getPaypalClientID in api.js
     5. add paypal checkout script in OrderScreen.js
     6. show paypal button
-35. Implement Order Payment
+34. Implement Order Payment
     1. update order after payment
     2. create payOrder in api.js
     3. create route for /:id/pay in orderRouter.js
     4. rerender after pay order
-36. Display Orders History
+35. Display Orders History
     1. create customer orders api
     2. create api for getMyOrders
     3. show orders in profile screen
     4. style orders
-37. List Users
+36. List Users
     1. build api for list users
     2. Create UserList Screen
     3. create order details constant, action and reducer
-38. Delete Users
+37. Delete Users
     1. build api for delete users
     2. create order details constant, action and reducer
     3. Use action in UserListScreen
-39. Edit User API and Screen
+38. Edit User API and Screen
     1. build api for details and update users
     2. create edit screen UI
-40. Edit User Action
+39. Edit User Action
     1. define user details constant, action and reducer
     2. show user info in edit screen
     3. define user update constant, action and reducer
     4. update user info in edit screen
-41. List Products
+40. List Products
     1. Create ProductList Screen
     2. Add to route
     3. use product list action
-42. Delete Products
+41. Delete Products
     1. build api for delete products
     2. create product delete constant, action and reducer
     3. Use action in ProductListScreen
-43. Build Product Create and Update API
+42. Build Product Create and Update API
     1. build api for delete products
     2. build api for delete products
-44. Create Product Action
+43. Create Product Action
     1. define product create constant, action and reducer
     2. use action in Product List Screen
-45. Create Product Edit Screen
+44. Create Product Edit Screen
     1. create edit screen ui
     2. define product details constant, action and reducer
     3. use action in Product Edit Screen
-46. Implement Edit Product Action
+45. Implement Edit Product Action
     1. define product update constant, action and reducer
     2. use action in Product Edit Screen
-47. Upload Product Image
+46. Upload Product Image
     1. npm install multer
     2. create routes/uploadRoute.js
     3. import express and multer
@@ -264,7 +265,7 @@
     13. call uploadProductImage()
     14. create uploadProductImage in api.js
     15. update server.js
-48. Admin Orders
+47. Admin Orders
     1. create Admin Order menu in header
     2. create AdminOrder.js
     3. load orders from backend
@@ -274,31 +275,31 @@
     7. if order is payed show deliver button for admin
     8. handle click on deliver button
     9. set state to delivered
-49. Implement Seller View
+48. Implement Seller View
     1. add seller menu
     2. list products for seller
     3. list orders for seller
     4. add Seller to Product List and Details Screen
-50. Create Seller Profile, Page and Carousel
+49. Create Seller Profile, Page and Carousel
     1. Add seller field to profile
     2. show seller field if user is seller
     3. upload seller logo
     4. create seller page
     5. show seller info and product
-51. Search Products
+50. Search Products
     1. create search bar in Header.js
     2. add style
     3. handle submit form
     4. edit parse url to get query string
     5. update product list api for search keyword
-52. Review Products and Sellers
+51. Review Products and Sellers
     1. create review form in product screen
     2. Implement product review api
     3. show reviews
     4. create review form in seller screen
     5. Implement seller review api
     6. show reviews
-53. Publish on heroku
+52. Publish on heroku
     1. Create git repository
     2. Create heroku account
     3. install Heroku CLI

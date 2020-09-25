@@ -101,9 +101,9 @@ function ProductEditScreen(props) {
         </div>
 
         {loadingUpdate && <LoadingBox />}
-        {errorUpdate && <MessageBox variant="error">{errorUpdate}</MessageBox>}
+        {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
         {loading && <LoadingBox />}
-        {error && <MessageBox variant="error">{error}</MessageBox>}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
         {product.name && (
           <>
             <div>

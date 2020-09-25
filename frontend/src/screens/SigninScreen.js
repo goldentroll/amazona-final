@@ -39,9 +39,9 @@ function SigninScreen(props) {
           <h1>Sign In</h1>
         </div>
         {loading && <LoadingBox />}
-        {error && <MessageBox variant="error">{error}</MessageBox>}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
         {message && (
-          <MessageBox variant="error">
+          <MessageBox variant="danger">
             {message.replace(/%20/g, ' ')}
           </MessageBox>
         )}

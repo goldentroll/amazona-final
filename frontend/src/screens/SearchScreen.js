@@ -68,7 +68,7 @@ function SearchScreen(props) {
         {loading ? (
           <LoadingBox />
         ) : error ? (
-          <MessageBox variant="error">{error}</MessageBox>
+          <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <div>
             {products.length} Results
@@ -118,7 +118,7 @@ function SearchScreen(props) {
               {loadingCategories ? (
                 <li>Loading...</li>
               ) : errorCategories ? (
-                <MessageBox variant="error">{errorCategories}</MessageBox>
+                <MessageBox variant="danger">{errorCategories}</MessageBox>
               ) : (
                 categories.map((c) => (
                   <li key={c}>
@@ -172,7 +172,7 @@ function SearchScreen(props) {
           {loading ? (
             <LoadingBox />
           ) : error ? (
-            <MessageBox variant="error">{error}</MessageBox>
+            <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <div className="row center">
               {products.length === 0 && (

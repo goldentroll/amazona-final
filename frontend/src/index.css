@@ -98,12 +98,12 @@ button.block {
 button.small {
   font-size: 1.2rem;
 }
+
 /* Alert */
-.success {
-  color: #20a020;
-}
-.error {
-  color: #a02020;
+.alert {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
 }
 .alert-info {
   color: #2020a0;
@@ -117,10 +117,11 @@ button.small {
   color: #a02020;
   background-color: #ffe0e0;
 }
-.alert {
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid transparent;
+.success {
+  color: #20a020;
+}
+.danger {
+  color: #a02020;
 }
 
 /* Header */

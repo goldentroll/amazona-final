@@ -66,7 +66,7 @@ function OrderScreen(props) {
   return loading ? (
     <LoadingBox />
   ) : error ? (
-    <MessageBox variant="error">{error}</MessageBox>
+    <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <>
       <h1> Order {order._id}</h1>
@@ -88,7 +88,7 @@ function OrderScreen(props) {
                   Delivered at {order.deliveredAt}
                 </MessageBox>
               ) : (
-                <MessageBox variant="error">Not Delivered</MessageBox>
+                <MessageBox variant="danger">Not Delivered</MessageBox>
               )}
             </li>
             <li className="card card-body">
@@ -101,7 +101,7 @@ function OrderScreen(props) {
                   Paid at {order.paidAt}
                 </MessageBox>
               ) : (
-                <MessageBox variant="error">Not Paid</MessageBox>
+                <MessageBox variant="danger">Not Paid</MessageBox>
               )}
             </li>
             <li className="card card-body">

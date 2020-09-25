@@ -71,13 +71,13 @@ function ProductListScreen(props) {
       {loading ? (
         <LoadingBox />
       ) : error ? (
-        <MessageBox variant="error">{error}</MessageBox>
+        <MessageBox variant="danger">{error}</MessageBox>
       ) : products.length === 0 ? (
         <MessageBox variant="info">No Order Found</MessageBox>
       ) : (
         <>
           {errorCreate && (
-            <MessageBox variant="error">{errorCreate}</MessageBox>
+            <MessageBox variant="danger">{errorCreate}</MessageBox>
           )}
           <table className="table">
             <thead>

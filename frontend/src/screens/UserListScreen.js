@@ -33,7 +33,7 @@ function UserListScreen(props) {
       {loading ? (
         <LoadingBox />
       ) : error ? (
-        <MessageBox variant="error">{error}</MessageBox>
+        <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <table className="table">
           <thead>

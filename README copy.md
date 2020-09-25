@@ -41,6 +41,7 @@ This course is for non-coders or juniors who want to be a professional web devel
 5.  Shipping and Payment Screen
     1. Create wizard form to get user data in multiple steps
     2. Save user info in the local storage
+    3. get user location using google map
 6.  Place Order Screen
     1. Validate and create order in the database
 7.  Order Screen

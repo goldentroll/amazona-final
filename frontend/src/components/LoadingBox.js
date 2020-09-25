@@ -1,5 +1,9 @@
 import React from 'react';
 
 export default function LoadingBox() {
-  return <div className="spinner">Loading...</div>;
+  return (
+    <div>
+      <i className="fa fa-spinner fa-spin" /> Loading...
+    </div>
+  );
 }

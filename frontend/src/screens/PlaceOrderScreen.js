@@ -133,7 +133,7 @@ function PlaceOrderScreen(props) {
               </li>
               {error && (
                 <li>
-                  <MessageBox variant="error">{error}</MessageBox>
+                  <MessageBox variant="danger">{error}</MessageBox>
                 </li>
               )}
               <li>

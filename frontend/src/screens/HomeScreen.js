@@ -33,7 +33,7 @@ function HomeScreen() {
       {loadingSellers ? (
         <LoadingBox />
       ) : errorSellers ? (
-        <MessageBox variant="error">{errorSellers}</MessageBox>
+        <MessageBox variant="danger">{errorSellers}</MessageBox>
       ) : (
         <>
           {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
@@ -55,7 +55,7 @@ function HomeScreen() {
       {loading ? (
         <LoadingBox />
       ) : error ? (
-        <MessageBox variant="error">{error}</MessageBox>
+        <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}

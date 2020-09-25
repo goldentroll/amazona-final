@@ -171,7 +171,7 @@ function App() {
               </li>
             ) : error ? (
               <li>
-                <MessageBox variant="error">{error}</MessageBox>
+                <MessageBox variant="danger">{error}</MessageBox>
               </li>
             ) : categories.length === 0 ? (
               <li>There is no categories.</li>

@@ -19,7 +19,7 @@ function OrderHistoryScreen(props) {
       {loading ? (
         <LoadingBox />
       ) : error ? (
-        <MessageBox variant="error">{error}</MessageBox>
+        <MessageBox variant="danger">{error}</MessageBox>
       ) : orders.length === 0 ? (
         <MessageBox variant="info">No Order Found</MessageBox>
       ) : (

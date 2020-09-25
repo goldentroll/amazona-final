@@ -26,7 +26,7 @@ function DashboardScreen() {
       {loading ? (
         <LoadingBox />
       ) : error ? (
-        <MessageBox variant="error">{error}</MessageBox>
+        <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
           <ul className="row summary">

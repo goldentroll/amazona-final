@@ -41,7 +41,7 @@ function RegisterScreen(props) {
           <h1>Create Account</h1>
         </div>
         {loading && <LoadingBox />}
-        {error && <MessageBox variant="error">{error}</MessageBox>}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
 
         <div>
           <label htmlFor="name">Name</label>
