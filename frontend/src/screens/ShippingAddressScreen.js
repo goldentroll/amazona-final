@@ -26,7 +26,6 @@ function ShippingAddressScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    e.preventDefault();
     const newLat = addressMap ? addressMap.lat : lat;
     const newLng = addressMap ? addressMap.lng : lng;
     if (addressMap) {

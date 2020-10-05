@@ -76,7 +76,6 @@ productRouter.post(
         rating: Number(req.body.rating),
         comment: req.body.comment,
       };
-      product.seller = req.user._id;
       product.reviews.push(review);
       product.numReviews = product.reviews.length;
       product.rating =

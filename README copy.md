@@ -1,3 +1,15 @@
+11. Add Sidebar Menu
+    1. create aside element
+    2. put product categories
+    3. add open and close menu
+12. Install ESlint For Code Linting
+    1.  npm install -D eslint
+    2.  install VSCode eslint extension
+    3.  Set VSCode setting for eslint
+    4.  Install prettier extension
+    5.  npm install -D eslint-config-prettier
+    6.  Add extends: "prettier"
+
 # Amazona ECommerce Website
 
 Hello and Welcome to my coding course to build an ecommerce website like amazon by MERN stack. In this course you will learn the essential tools and skills to design, develop and deploy a fully-function marketplace website using React and Redux in frontend and Node and MongoDB in backend.

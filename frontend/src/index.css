@@ -270,22 +270,13 @@ aside li {
   margin: 0;
 }
 .form > div {
+  margin: 1rem;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin: 2rem;
+  flex-direction: column;
 }
 .form label {
-  flex: 1 1 20rem;
-  margin-bottom: 1rem;
-}
-.form input,
-.form button,
-.form select,
-.form textarea,
-.form > div > div {
-  flex: 2 1 40rem;
+  display: block;
+  margin: 1rem 0;
 }
 
 /* Checkout Steps */
