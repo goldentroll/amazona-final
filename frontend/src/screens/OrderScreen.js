@@ -113,7 +113,7 @@ function OrderScreen(props) {
                   {order.orderItems.map((item) => (
                     <li key={item._id}>
                       <div className="row">
-                        <div md={1}>
+                        <div>
                           <img
                             src={item.image}
                             alt={item.name}

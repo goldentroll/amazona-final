@@ -19,6 +19,7 @@ function ProductEditScreen(props) {
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [errorUpload, setErrorUpload] = useState('');
 
   const productUpdate = useSelector((state) => state.productUpdate);
   const {
@@ -53,29 +54,29 @@ function ProductEditScreen(props) {
       //
     };
   }, [product, successUpdate, dispatch, props.history, productId]);
-  const uploadFileHandler = (e, forImages) => {
+
+  const uploadFileHandler = async (e, forImages) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
     setUploading(true);
-    axios
-      .post('/api/uploads', bodyFormData, {
+    try {
+      const { data } = await axios.post('/api/uploads', bodyFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-      })
-      .then((response) => {
-        if (forImages) {
-          setImages([...images, response.data]);
-        } else {
-          setImage(response.data);
-        }
-        setUploading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setUploading(false);
       });
+      if (forImages) {
+        setImages([...images, data]);
+      } else {
+        setImage(data);
+      }
+      setUploading(false);
+    } catch (err) {
+      console.log(err);
+      setErrorUpload(err);
+      setUploading(false);
+    }
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -102,6 +103,7 @@ function ProductEditScreen(props) {
 
         {loadingUpdate && <LoadingBox />}
         {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
+        {errorUpload && <MessageBox variant="danger">{errorUpload}</MessageBox>}
         {loading && <LoadingBox />}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         {product.name && (

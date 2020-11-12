@@ -1,3 +1,4 @@
+
 1. Introduction to this course
    1. what you will build
    2. what you will learn
@@ -126,8 +127,13 @@
     3. create productRoute
     4. Seed sample data
 20. Create Sign-in Backend
-    1. create API for /api/users/signin
-    2. create isAuth middleware
+    1. create /signin api
+    2. check email and password
+    3. generate token
+    4. install json web token
+    5. install dotenv
+    6. return token and data
+    7. test it using postman
 21. Design SignIn Screen
     1. create SigninScreen
     2. render email and password fields
@@ -137,7 +143,7 @@
     1. create signin constants, actions and reducers
     2. add reducer to store.js
     3. use action in SigninScreen.js
-23. Create Register Backend and Screen
+23. Create Register Screen
     1. create API for /api/users/register
     2. insert new user to database
     3. return user info and token
@@ -145,175 +151,146 @@
     5. Add fields
     6. Style fields
     7. Add screen to App.js
-24. Implement Register Action
-    1. create register constants, actions and reducers
-    2. add reducer to store.js
-    3. use action in RegisterScreen.js
-25. Create Profile Backend and Screen
-    1. create isAuth middleware
-    2. create profile update api in backend
-    3. create isAuth in utils.js and use in update profile
-    4. create ProfileScreen.js
-    5. add form elements
-26. Implement Profile Action
-    1. create user details constants, actions and reducers
-    2. add reducer to store.js
-    3. use action in ProfileScreen.js
-    4. create update profile constants, actions and reducers
-    5. add reducer to store.js
-    6. use action in ProfileScreen.js
-27. Design Checkout Wizard Screen
-    1. create CheckoutSteps.js
-    2. create div elements for step 1 to 4
-    3. handle redirect in signin and register
-    4. create shipping screen
-28. Implement Checkout Wizard Action
-    1. saveShippingAddress constant, reducer and actions
-    2. copy shipping screen and as payment screen
-    3. define getPayment and setPayment
-    4. redirect user to PlaceOrder.js
-29. Create Place Order API
+    8. create register action and reducer
+    9. check validation and create user
+24. Create Shipping Screen
+    1. create CheckoutSteps.js component
+    2. create shipping fields
+    3. implement shipping constant, actions and reducers
+25. Create Payment Screen
+    1. create payment fields
+    2. implement shipping constant, actions and reducers
+26. Design Place Order Screen
+    1. design order summary fields
+    2. design order action
+27. Create Place Order API
     1. createOrder api
     2. create orderModel
     3. create orderRouter
     4. create post order route
-30. Design PlaceOrder Screen
-    1. create CartScreen.js
-    2. Add checkout wizard
-    3. Add shipping, payment and items preview
-    4. Add Place Order button
-31. Implement PlaceOrder Action
+28. Implement PlaceOrder Action
     1. handle place order button click
     2. create place order constants, action and reducer
-32. Create Order Screen
+29. Create Order Screen
     1. build order api for /api/orders/:id
     2. create OrderScreen.js
     3. dispatch order details action in useEffect
     4. load data with useSelector
     5. show data like place order screen
     6. create order details constant, action and reducer
-33. Add PayPal Button
+30. Add PayPal Button
     1. get client id from paypal
     2. set it in .env file
     3. create route form /api/paypal/clientId
     4. create getPaypalClientID in api.js
     5. add paypal checkout script in OrderScreen.js
     6. show paypal button
-34. Implement Order Payment
+31. Implement Order Payment
     1. update order after payment
     2. create payOrder in api.js
     3. create route for /:id/pay in orderRouter.js
     4. rerender after pay order
-35. Display Orders History
+32. Display Orders History
     1. create customer orders api
     2. create api for getMyOrders
     3. show orders in profile screen
     4. style orders
-36. List Users
+33. Display User Profile
+    1. create user details api
+    2. show user information
+34. Update User Profile
+    1. create user update api
+    2. update user info
+35. Create Admin View
+    1. Create Admin Menu
+    2. Create Admin Middleware in Backend
+    3. Create Admin Route in Frontend
+36. List Products
+    1. Create Product List Screen
+    2. Add reducer to store
+    3. show products on the screen
+37. Create Product
+    1. build create product api
+    2. build Create Product button
+    3. define product create constant, action and reducer
+    4. use action in Product List Screen
+38. Build Product Edit Screen
+    1. create edit screen
+    2. define state
+    3. create fields
+    4. load product details
+    5.  add to routes
+39. Update Product
+    1. define update api
+    2. define product update constant, action and reducer
+    3. use action in Product Edit Screen
+40. Upload Product Image
+    1. npm install multer
+    7. define upload router
+    8. create uploads folder 
+    9. Handle frontend
+41. Delete Product
+    1.  create delete api in backend
+    2.  create delete constants, action and reducer
+    3.  use it in product list screen
+42. List Orders
+    1. create Order List Screen
+    2. Add reducer to store
+    3. show products on the screen
+43. Delete Order
+    2. create constant, actions and reducers for delete order
+    3. add order delete action to order list
+44. Deliver Order
+    1. create constant, actions and reducers for deliver order
+    2. add order deliver action to order details
+45. Publish To Heroku
+    1. Create git repository
+    2. Create heroku account
+    3. install Heroku CLI
+    4. heroku login
+    5. heroku apps:create <yourname>amazona
+    6. Edit package.json for build script
+    10. Create Procfile
+    12. Create mongodb atlas database
+    19. Set database connection in heroku env variables
+    20. Commit and push
+46. List Users
     1. build api for list users
     2. Create UserList Screen
     3. create order details constant, action and reducer
-37. Delete Users
+47. Delete Users
     1. build api for delete users
     2. create order details constant, action and reducer
     3. Use action in UserListScreen
-38. Edit User API and Screen
+48. Edit User API and Screen
     1. build api for details and update users
     2. create edit screen UI
-39. Edit User Action
+49. Edit User Action
     1. define user details constant, action and reducer
     2. show user info in edit screen
     3. define user update constant, action and reducer
     4. update user info in edit screen
-40. List Products
-    1. Create ProductList Screen
-    2. Add to route
-    3. use product list action
-41. Delete Products
-    1. build api for delete products
-    2. create product delete constant, action and reducer
-    3. Use action in ProductListScreen
-42. Build Product Create and Update API
-    1. build api for delete products
-    2. build api for delete products
-43. Create Product Action
-    1. define product create constant, action and reducer
-    2. use action in Product List Screen
-44. Create Product Edit Screen
-    1. create edit screen ui
-    2. define product details constant, action and reducer
-    3. use action in Product Edit Screen
-45. Implement Edit Product Action
-    1. define product update constant, action and reducer
-    2. use action in Product Edit Screen
-46. Upload Product Image
-    1. npm install multer
-    2. create routes/uploadRoute.js
-    3. import express and multer
-    4. create disk storage with Date.now().jpg as filename
-    5. set upload as multer({ storage })
-    6. router.post('/', upload.single('image'))
-    7. app.use('/api/uploads',uploadRoute) in server.js
-    8. create uploads folder and put empty file.txt there.
-    9. ProductEditScreen.js
-    10. create file input and set id to image-file
-    11. handle image-file change
-    12. create form data
-    13. call uploadProductImage()
-    14. create uploadProductImage in api.js
-    15. update server.js
-47. Admin Orders
-    1. create Admin Order menu in header
-    2. create AdminOrder.js
-    3. load orders from backend
-    4. list them in the screen
-    5. show delete and edit button
-    6. redirect to order details
-    7. if order is payed show deliver button for admin
-    8. handle click on deliver button
-    9. set state to delivered
-48. Implement Seller View
+50. Implement Seller View
     1. add seller menu
     2. list products for seller
     3. list orders for seller
     4. add Seller to Product List and Details Screen
-49. Create Seller Profile, Page and Carousel
+51. Create Seller Profile, Page and Carousel
     1. Add seller field to profile
     2. show seller field if user is seller
     3. upload seller logo
     4. create seller page
     5. show seller info and product
-50. Search Products
+52. Search Products
     1. create search bar in Header.js
     2. add style
     3. handle submit form
     4. edit parse url to get query string
     5. update product list api for search keyword
-51. Review Products and Sellers
+53. Review Products and Sellers
     1. create review form in product screen
     2. Implement product review api
     3. show reviews
     4. create review form in seller screen
     5. Implement seller review api
     6. show reviews
-52. Publish on heroku
-    1. Create git repository
-    2. Create heroku account
-    3. install Heroku CLI
-    4. heroku login
-    5. heroku apps:create <yourname>mernmp
-    6. Edit package.json for build script
-    7. `cd frontend && npm install && npm run build`
-    8. Edit package.json for node engines
-    9. `"engines": { "node": "12.4.0", "npm": "6.9.0" }`
-    10. Create Procfile
-    11. `web: node --experimental-modules backend/server.js`
-    12. Create mongodb atlas database
-    13. create MongoDB Account
-    14. open cloud.mongodb.com
-    15. add new user and save username and password
-    16. set Network Access to accept all requests
-    17. Create new database
-    18. create connection string based on db name and user and password
-    19. Set Cloud MongoDB connection in heroku env variables
-    20. Commit and push

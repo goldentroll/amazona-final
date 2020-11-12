@@ -136,7 +136,7 @@ productRouter.delete(
 productRouter.post(
   '/',
   isAuth,
-  isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
       name: 'sample name',
