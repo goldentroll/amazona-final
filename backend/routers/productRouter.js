@@ -8,19 +8,31 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const category = req.query.category ? { category: req.query.category } : {};
-    const price =
-      req.query.min && req.query.max
+    const name = req.query.name || '';
+    const category = req.query.category || '';
+    const seller = req.query.seller || '';
+    const min =
+      req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
+    const max =
+      req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
+    const rating =
+      req.query.rating && Number(req.query.rating) !== 0
+        ? Number(req.query.rating)
+        : 0;
+
+    const categoryFilter = category ? { category } : {};
+    const priceFilter =
+      min && max
         ? {
-            price: { $gte: Number(req.query.min), $lte: Number(req.query.max) },
+            price: { $gte: Number(min), $lte: Number(max) },
           }
         : {};
-    const rate = req.query.rate ? { rating: { $gte: req.query.rate } } : {};
-    const seller = req.query.seller ? { seller: req.query.seller } : {};
-    const keyword = req.query.keyword
+    const ratingFilter = rating ? { rating: { $gte: rating } } : {};
+    const sellerFilter = seller ? { seller } : {};
+    const nameFilter = name
       ? {
           name: {
-            $regex: req.query.keyword,
+            $regex: name,
             $options: 'i',
           },
         }
@@ -35,11 +47,11 @@ productRouter.get(
         : { rating: -1 }
       : { _id: -1 };
     const products = await Product.find({
-      ...seller,
-      ...category,
-      ...keyword,
-      ...price,
-      ...rate,
+      ...sellerFilter,
+      ...categoryFilter,
+      ...nameFilter,
+      ...priceFilter,
+      ...ratingFilter,
     })
       .populate('seller', 'seller.name seller.logo')
       .sort(order);

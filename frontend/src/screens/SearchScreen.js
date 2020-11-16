@@ -23,11 +23,11 @@ function SearchScreen(props) {
 
   const {
     category = 'all',
-    keyword = 'all',
+    name = 'all',
     order = 'newest',
     min = 0,
     max = 1000000,
-    rate = 0,
+    rating = 0,
   } = useParams();
 
   const dispatch = useDispatch();
@@ -37,28 +37,28 @@ function SearchScreen(props) {
       listProducts({
         order,
         category: category !== 'all' ? category : '',
-        keyword: keyword !== 'all' ? keyword : '',
+        name: name !== 'all' ? name : '',
         min,
         max,
-        rate,
+        rating,
       })
     );
 
     return () => {
       //
     };
-  }, [category, order, min, max, rate, dispatch, keyword]);
+  }, [category, order, min, max, rating, dispatch, name]);
 
   const getFilterUrl = (filter) => {
     const filterCategory = filter.category || category;
-    const filterKeyword = filter.keyword || keyword;
+    const filterName = filter.name || name;
     const filterOrder = filter.order || order;
 
     const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
     const filterMax = filter.max || max;
-    const filterRate = filter.rate || rate;
+    const filterRating = filter.rating || rating;
 
-    return `/search/category/${filterCategory}/keyword/${filterKeyword}/order/${filterOrder}/min/${filterMin}/max/${filterMax}/rate/${filterRate}`;
+    return `/search/category/${filterCategory}/name/${filterName}/order/${filterOrder}/min/${filterMin}/max/${filterMax}/rating/${filterRating}`;
   };
 
   return (
@@ -72,10 +72,10 @@ function SearchScreen(props) {
           <div>
             {products.length} Results
             {category !== 'all' && ` : ${category}`}
-            {keyword !== 'all' && ` : ${keyword}`}
-            {rate > 0 && ` : ${rate} Stars & Up`}
+            {name !== 'all' && ` : ${name}`}
+            {rating > 0 && ` : ${rating} Stars & Up`}
             {min !== 0 && ` : $${min} to $${max}`}
-            {category !== 'all' || keyword !== 'all' || rate > 0 || min ? (
+            {category !== 'all' || name !== 'all' || rating > 0 || min ? (
               <>
                 &nbsp;
                 <button
@@ -114,6 +114,14 @@ function SearchScreen(props) {
           <div>
             <h3>Department</h3>
             <ul>
+              <li>
+                <Link
+                  className={category === 'all' ? 'active' : ''}
+                  to={getFilterUrl({ category: 'all' })}
+                >
+                  Any
+                </Link>
+              </li>
               {loadingCategories ? (
                 <li>Loading...</li>
               ) : errorCategories ? (
@@ -153,14 +161,14 @@ function SearchScreen(props) {
             <h2>Avg. Customer Review</h2>
             <ul>
               {ratings.map((x) => (
-                <li key={x.rate}>
+                <li key={x.rating}>
                   <Link
-                    className={`${x.rate}` === rate ? 'active' : ''}
+                    className={`${x.rating}` === rating ? 'active' : ''}
                     to={getFilterUrl({
-                      rate: x.rate,
+                      rating: x.rating,
                     })}
                   >
-                    <Rating value={x.rate} text=" & Up" />
+                    <Rating value={x.rating} text=" & Up" />
                   </Link>
                 </li>
               ))}

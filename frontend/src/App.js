@@ -221,16 +221,12 @@ function App() {
 
           {/* Public  */}
           <Route
-            path="/search/category/:category/keyword/:keyword/order/:order/min/:min/max/:max/rate/:rate"
+            path="/search/category/:category/name/:name/order/:order/min/:min/max/:max/rating/:rating"
             component={SearchScreen}
           />
+          <Route path="/search/name/:name" component={SearchScreen} exact />
           <Route
-            path="/search/keyword/:keyword?"
-            component={SearchScreen}
-            exact
-          />
-          <Route
-            path="/search/category/:category?"
+            path="/search/category/:category"
             component={SearchScreen}
             exact
           />

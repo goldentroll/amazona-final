@@ -24,21 +24,21 @@ export const ratings = [
   {
     _id: 1,
     name: '4stars & up',
-    rate: 4,
+    rating: 4,
   },
   {
     _id: 2,
     name: '3stars & up',
-    rate: 3,
+    rating: 3,
   },
   {
     _id: 3,
     name: '2stars & up',
-    rate: 2,
+    rating: 2,
   },
   {
     _id: 4,
     name: '1stars & up',
-    rate: 1,
+    rating: 1,
   },
 ];

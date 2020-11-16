@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 export default function SearchBox(props) {
-  const [keyword, setKeyword] = useState('');
+  const [name, setName] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.history.push(`/search/keyword/${keyword}`);
+    props.history.push(`/search/name/${name}`);
   };
   return (
     <form className="search" onSubmit={handleSubmit}>
@@ -13,7 +13,7 @@ export default function SearchBox(props) {
           type="text"
           name="q"
           id="q"
-          onChange={(e) => setKeyword(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
         <button className="primary" type="submit">
           <i className="fa fa-search" />

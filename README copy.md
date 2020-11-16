@@ -386,7 +386,7 @@ This course is for non-coders or juniors who want to be a professional web devel
     2. add style
     3. handle submit form
     4. edit parse url to get query string
-    5. update product list api for search keyword
+    5. update product list api for search name
 48. Show Categories In Sidebar Menu
     1. create aside-open-button in Header.js
     2. add event to open aside

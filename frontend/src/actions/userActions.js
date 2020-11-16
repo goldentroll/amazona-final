@@ -27,16 +27,10 @@ import {
   USER_TOPSELLERS_LIST_SUCCESS,
 } from '../constants/userConstants';
 
-export const listUsers = (
-  category = '',
-  keyword = '',
-  sortOrder = ''
-) => async (dispatch) => {
+export const listUsers = () => async (dispatch) => {
   try {
     dispatch({ type: USER_LIST_REQUEST });
-    const { data } = await axios.get(
-      `/api/users?category=${category}&keyword=${keyword}&sortOrder=${sortOrder}`
-    );
+    const { data } = await axios.get(`/api/users`);
     dispatch({ type: USER_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
