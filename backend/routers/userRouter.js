@@ -118,7 +118,6 @@ userRouter.post(
 );
 
 /* admin */
-
 userRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {

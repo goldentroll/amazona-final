@@ -36,7 +36,6 @@ function SearchScreen(props) {
     dispatch(
       listProducts({
         order,
-
         category: category !== 'all' ? category : '',
         keyword: keyword !== 'all' ? keyword : '',
         min,

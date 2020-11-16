@@ -26,13 +26,16 @@ import {
 export const listProducts = ({
   category = '',
   keyword = '',
-  sortOrder = '',
+  order = '',
   seller = '',
+  min = 0,
+  max = 0,
+  rate = 0,
 }) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
     const { data } = await axios.get(
-      `/api/products?category=${category}&seller=${seller}&keyword=${keyword}&sortOrder=${sortOrder}`
+      `/api/products?category=${category}&seller=${seller}&keyword=${keyword}&order=${order}&min=${min}&max=${max}&rate=${rate}`
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {

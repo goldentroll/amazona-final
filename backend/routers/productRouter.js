@@ -9,6 +9,13 @@ productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
     const category = req.query.category ? { category: req.query.category } : {};
+    const price =
+      req.query.min && req.query.max
+        ? {
+            price: { $gte: Number(req.query.min), $lte: Number(req.query.max) },
+          }
+        : {};
+    const rate = req.query.rate ? { rating: { $gte: req.query.rate } } : {};
     const seller = req.query.seller ? { seller: req.query.seller } : {};
     const keyword = req.query.keyword
       ? {
@@ -18,18 +25,24 @@ productRouter.get(
           },
         }
       : {};
-    const sortOrder = req.query.sortOrder
-      ? req.query.sortOrder === 'lowest'
+    const order = req.query.order
+      ? req.query.order === 'lowest'
         ? { price: 1 }
-        : { price: -1 }
+        : req.query.order === 'highest'
+        ? { price: -1 }
+        : req.query.order === 'newest'
+        ? { _id: -1 }
+        : { rating: -1 }
       : { _id: -1 };
     const products = await Product.find({
       ...seller,
       ...category,
       ...keyword,
+      ...price,
+      ...rate,
     })
       .populate('seller', 'seller.name seller.logo')
-      .sort(sortOrder);
+      .sort(order);
     res.send(products);
   })
 );
