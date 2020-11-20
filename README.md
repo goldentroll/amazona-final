@@ -265,22 +265,23 @@
 48. Edit User API and Screen
     1. build api for details and update users
     2. create edit screen UI
-49. Edit User Action
-    1. define user details constant, action and reducer
-    2. show user info in edit screen
-    3. define user update constant, action and reducer
-    4. update user info in edit screen
-50. Implement Seller View
+48. Edit User
+    1. build api for update users
+    2. create edit screen UI
+49. Implement Seller View
     1. add seller menu
-    2. list products for seller
-    3. list orders for seller
-    4. add Seller to Product List and Details Screen
-51. Create Seller Profile, Page and Carousel
-    1. Add seller field to profile
-    2. show seller field if user is seller
-    3. upload seller logo
-    4. create seller page
-    5. show seller info and product
+    2. create seller route
+    3. list products for seller
+    4. list orders for seller
+    5. add Seller to Product List and Details Screen
+50. Create Seller Page
+    1. create seller page
+    2. update product component and product screen
+    3. update product routes
+51. Add Top Seller Carousel
+    1. install react carousel
+    2. implement actions and reducers for top sellers
+    3. use react carousel with data in Home Screen
 52. Search Products
     1. create search bar in Header.js
     2. add style

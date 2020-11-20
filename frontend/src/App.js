@@ -210,12 +210,12 @@ function App() {
             component={ProductListScreen}
           />
           <SellerRoute path="/product/:id/edit" component={ProductEditScreen} />
-          <SellerRoute path="/user/:id/edit" component={UserEditScreen} />
 
           {/* Admin  */}
           <AdminRoute path="/support" component={SupportScreen} />
           <AdminRoute path="/dashboard" component={DashboardScreen} />
           <AdminRoute path="/userlist" component={UserListScreen} />
+          <AdminRoute path="/user/:id/edit" component={UserEditScreen} />
           <AdminRoute path="/orderlist" component={OrderListScreen} exact />
           <AdminRoute path="/productlist" component={ProductListScreen} exact />
 
