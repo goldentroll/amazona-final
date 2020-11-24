@@ -224,7 +224,7 @@ function App() {
             path="/search/category/:category/name/:name/order/:order/min/:min/max/:max/rating/:rating"
             component={SearchScreen}
           />
-          <Route path="/search/name/:name" component={SearchScreen} exact />
+          <Route path="/search/name/:name?" component={SearchScreen} exact />
           <Route
             path="/search/category/:category"
             component={SearchScreen}
